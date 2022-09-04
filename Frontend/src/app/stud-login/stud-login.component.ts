@@ -59,7 +59,7 @@ export class StudLoginComponent implements OnInit {
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
               }
             });
-            this._router.navigate(['student/dashboard/profile'])
+            this._router.navigate(['student/home'])
           }} ,
       error: (err:any) => {
             console.log(err);

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -110,8 +111,29 @@ export class StudAuthService {
       return this.http.put<any>("http://localhost:3000/student/dashboard/update2",stud)
       .subscribe((data:any) => {console.log(data)})
   }
-  // booksdata(){
-  //   return this.http.get("books");
-  // }
+  joblist(){
+    return this.http.get("http://localhost:3000/student/jobListing");
+  }
+  job_applypage(id:any){
+    return this.http.get<any>("http://localhost:3000/student/job/"+id)
+    // console.log
+  }
+  application(val:any){
+    console.log("in service");
+    return this.http.put<any>("http://localhost:3000/student/applyjob",val)
+    .subscribe(data => {console.log(data)})
+  
+}
+upload(file:any):Observable<any>{
+  // create form data 
+  const formData = new FormData();
+  formData.append('file',file); //there was file.name
+  return this.http.post<any>("http://localhost:3000/student/file",formData)
+}
+
+job_history(id:any){
+  return this.http.get<any>("http://localhost:3000/student/history/"+id)
+  // console.log
+}
   
 }

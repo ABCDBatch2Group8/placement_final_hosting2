@@ -1,0 +1,30 @@
+<div class="container col-lg-7 ">
+    <!-- <div class="text-center mb-5">
+        
+        <h1 class="text-capitalize font-weight-bold">Jobs for You</h1>
+    </div> -->
+    
+
+    
+        <div class="my-5 pl-40 py-3 bg-light  align-items-center justify-content shadow p-3 mb-5 bg-white rounded">
+        
+        <h5><span class="text-info">{{jobs.position}}</span></h5>
+            <!-- <h1 class="my-2 font-weight-bold">sdfs</h1>  -->
+            
+            <div class="row">
+                <div class="col"><p><i class="fas fa-rupee-sign"></i><small>{{jobs.salary}}</small></p></div>
+                <div class="col"><p><i class="fas fa-briefcase" aria-hidden="true"></i><small>{{jobs.experience}}</small></p></div>
+                <div class="col"><p><i class="fas fa-map-marker-alt"></i><small>{{jobs.location}}</small></p></div>
+            </div>
+        <div class=" text-uppercase text-secondary">
+        <p class="txt"><i class="fas fa-file-alt" aria-hidden="true"></i><small>{{jobs.jd_text}}</small></p>
+        <!-- <small class="d-block">247</small> -->
+        </div>
+        <div class="text-uppercase text-primary">
+            <a (click)= Click(jobs.jobid) routerLink="/student/apply" class="genric-btn success-border medium">APPLY<span
+                class="lnr lnr-arrow-right"></span></a>
+                <div style="height: 10px;"></div>
+        </div>  
+        </div>
+    
+</div>

@@ -6,8 +6,9 @@ const router=express.Router();
 const adminModel=require('../models/subadmin');
 const ictkStudModel=require('../models/ictak_student');
 const courseModel=require('../models/course');
-const employerModel=require('../models/employer')
-const candidateModel=require('../models/candidates')
+const employerModel=require('../models/employer');
+const candidateModel=require('../models/candidates');
+const jobsModels=require('../models/job');
 
 
 router.get('/',(req,res)=>{
@@ -248,5 +249,123 @@ router.put('/updateemplinfo',(req,res)=>{
        res.send();
    })
  })
+
+ //RESET EMPLOYER STATUS
+ router.put('/employerreset',(req,res)=>{    
+    //console.log(req.body.empid)
+    id=req.body.empid,
+    statval= req.body.statset
+    
+    employerModel.findByIdAndUpdate({"_id":id},
+                                {$set:{"disable_status":statval}})
+                                .then(()=>{
+                                    //console.log('reset success')
+                                    //res.send();
+                                    employerModel.find().then(function(employer){
+                                        res.send(employer);    
+                                    });
+                                })   
+ })
+
+ //CREATE NEW EMPLOYER ACCOUNT
+ router.post('/createemployer', async (req, res) => {
+
+    employerModel.findOne({ "email": req.body.employer.email }).then(function (getEmail) {
+      //Allow signup only if the email is not already registered 
+      if (getEmail == null) {
+        //console.log("req.body", req.body)
+        const employer = new employerModel({
+          title: req.body.employer.title,
+          email: req.body.employer.email,
+          phone: req.body.employer.phone,
+          password: req.body.employer.password,
+          gstin: req.body.employer.gstin,
+          companyInfo: req.body.employer.companyInfo
+        });
+        employer.save()
+          .then(data => {
+            res.json({ "message": "Employer Record Created", "status": "success" });
+            //console.log("success")
+          })
+          .catch(err => {
+            res.json({ "message": err, "status": "error" });
+            console.log("error", err)
+          })
+      }
+      else {        
+        //console.log("email exists")
+        res.json({ "message": "Email ID already registered", "status": "error" })
+      }
+    })
+  });
+
+  // GET EMPLOYER COUNT
+router.get('/employercount',(req,res)=>{    
+    employerModel.count().then(function(empcount){
+       //console.log(empcount);
+       res.json(empcount);
+    });
+});
+
+//GET ACTIVE EMPLOYERS COUNT
+router.get('/activeemployers',(req,res)=>{    
+    employerModel.find({"disable_status" : "N"}).count().then(function(empcount){
+       //console.log(empcount);
+       res.json(empcount);
+    });
+});
+
+//GET STUDENTS COUNT
+router.get('/studentcount',(req,res)=>{    
+    candidateModel.count().then(function(stdcount){
+       //console.log(empcount);
+       res.json(stdcount);
+    });
+});
+
+//GET JOBS COUNT
+router.get('/jobscount',(req,res)=>{    
+    jobsModels.count().then(function(jobcount){
+       //console.log(jobcount);
+       res.json(jobcount);
+    });
+});
+
+//GET EMPLOYERS JOBS LIST
+router.get('/employerjoblist/:id',function(req,res){
+    const id = req.params.id;
+    //console.log(id);
+
+    jobsModels.find({"emp_ref" : id})
+      .then((joblist)=>{
+          res.send(joblist);
+          //console.log(joblist);
+      }); 
+});
+
+//RETURN JOB DETAILS
+router.get('/jobpreview/:id',function(req,res){
+    const jid = req.params.id;
+    console.log(jid);
+    
+    jobsModels.findOne({_id: jid})
+      .then((jobview)=>{
+        console.log(jobview);
+          res.send(jobview);
+      }); 
+        
+});
+
+//LISTING OF ALL JOBS
+router.get('/joblistings',function(req,res){
+        
+    jobsModels.find()
+      .then((joblist)=>{
+          res.send(joblist);
+          //console.log(joblist);
+      }); 
+        
+});
+
 
 module.exports=router;

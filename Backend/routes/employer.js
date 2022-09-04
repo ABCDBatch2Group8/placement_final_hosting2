@@ -57,7 +57,7 @@ router.post('/login', (req, res) => {
       if (getUser.disable_status == "N") {
         if (pwd == getUser.password) {
           console.log("Valid login")
-          res.json({ "message": "Login successful", "status": "success", "eid": getUser._id });
+          res.json({ "message": "Login successful", "status": "success", "eid": getUser._id,"company":getUser.title });
           flag = true
           console.log(getUser);
         }

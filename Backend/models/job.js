@@ -1,13 +1,22 @@
+const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let SkillsSchema = new Schema({item_id: Number, item_text: String
                               })
 
-let ApplicantsSchema = new Schema({email: String, shortlist_status: Boolean,application_status: String})
+let ApplicantsSchema = new Schema({stud_ref: String, shortlist_status: Boolean,application_status: String})
 
 let jobsSchema = new Schema({
   jobid: {
+    type: String,
+    required: true
+  },
+  emp_ref: {
+    type: String,
+    required: true
+  },
+  company: {
     type: String,
     required: true
   },

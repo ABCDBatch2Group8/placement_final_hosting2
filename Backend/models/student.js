@@ -6,17 +6,19 @@ const SignupSchema = new Schema({
     email :{type : String,required: true},
     dwmsid :{type : String,required: true},
     contactNo :{type : String,required: true},
-    courseInICT : {type : String,required: true},
+    courseInICTAK : {type : String,required: true},
     qualification : {type : String,required: true},
     stream : {type : String,required: true},
     password : {type : String,required: true},
+    resume :{type :String},
     // skill:{type:String}
     // non required groups below
+    YearOfPassout:{type:String},
     educationMarks:{
-        Mark10:{type : String},Mark12:{type : String},QualificationMark:{type : String}},                  //input year of graduation too10thMark
+        Mark10:{type : Number},Mark12:{type : Number},QualificationMark:{type : Number}},                  //input year of graduation too10thMark
     // pg : {type:Array},                       //array
      courseStatus:{type : String},             //done
-     ictMarks: {type:String},
+     ICTAKscore: {type:Number},
      location:{type : String},               //Ernakulam
      readyToRelocate :{type : String},           //yes
 

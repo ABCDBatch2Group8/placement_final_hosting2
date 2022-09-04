@@ -22,36 +22,42 @@
 
       <div class="form-group  col-md-6">
         <label> Course status</label>
-        <input
-          type="text"
-          class="form-control"
-          name="fullname"
-          [(ngModel)]="Signin.courseStatus"
+        <select  type="text"class="form-control" name="Coursestatus"[(ngModel)]="Signin.courseStatus"
+        #Coursestatus="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && Coursestatus.errors }"
+          >
+          <option value="Ongoing">Ongoing</option>
+          <option value="completed">completed</option>
+         
+        </select>
+          <!-- 
           
-          #fullname="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && fullname.errors }"
-        />
+          name="fullname" -->
+          
+          
+          
+        
         <!-- <div *ngIf="f.submitted && fullname.errors" class="invalid-feedback">
           <div *ngIf="fullname.errors['required']">Fullname is required</div>
         </div> -->
       </div>
       
       <div class="form-group col-md-6">
-        <label>Ict Marks</label>
+        <label>ICTAK Marks (%)</label>
         <input
           type="text"
           class="form-control"
-          name="email"
+          name="ictMarks"
           [(ngModel)]="Signin.ictMarks"
+          required
           
-          
-          #email="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+          #ictMarks="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && ictMarks.errors }"
         />
-        <!-- <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
-          <div *ngIf="email.errors['required']">Email is required</div>
-          <div *ngIf="email.errors['email']">Email is invalid</div>
-        </div> -->
+         <div *ngIf="f.submitted && ictMarks.errors" class="invalid-feedback">
+          <div *ngIf="ictMarks.errors['required']">ICTAK marks is required</div>
+          <!-- <div *ngIf="ictMarks.errors['email']">Email is invalid</div> -->
+        </div> 
       </div>
     </div>
       <div class="form-group">
@@ -64,14 +70,14 @@
           required
           minlength="6"
           maxlength="40"
-          #password="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+          #location="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && location.errors }"
         />
-        <div *ngIf= "f.submitted && password.errors" class="invalid-feedback">
+        <div *ngIf= "f.submitted && location.errors" class="invalid-feedback">
           <!-- <div *ngIf= "password.errors['required']">Password is required</div> -->
-          <div *ngIf= "password.errors['minlength']">
+          <!-- <div *ngIf= "location.errors['minlength']">
             Password must be at least 3 characters
-          </div>
+          </div> -->
           <!-- <div *ngIf="password.errors['maxlength']"> -->
             <!-- Username must not exceed 40 characters -->
           <!-- </div> -->
@@ -80,7 +86,7 @@
   
       <div class="form-group">
         <label>Are you ready to Relocate</label>
-        <input
+        <select
           type="text"
           class="form-control"
           name="readyto"
@@ -88,26 +94,51 @@
           
           #readyto="ngModel"
           [ngClass]="{ 'is-invalid': f.submitted && readyto.errors }"
-        />
+          >
+          <option value="yes ">yes</option>
+          <option value="no">no</option>
+       
+      </select>
+      </div>
         <!-- <div *ngIf= "f.submitted && readyto.errors" class="invalid-feedback">
            <div *ngIf= "readyto.errors['required']">DWMS ID is required</div> 
         </div> -->
-      </div>
+      <!-- </div> -->
 
   
       <div class="form-group">
         <label>Employment Status</label>
-        <input
+        <select
           type="text"
           class="form-control"
-          name="contactNo"
+          name="employmentStatus"
           [(ngModel)]= "Signin.employmentStatus"
           
-          #contactNo="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && contactNo.errors }"
-        />
-        <!-- <div *ngIf="f.submitted && contactNo.errors" class="invalid-feedback"> -->
-          <!-- <div *ngIf="contactNo.errors['required']">CONTACT NUMBER is required</div> -->
+          #employmentStatus="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && employmentStatus.errors }"
+        >
+        <option value="employed">employed</option>
+        <option value="self employed ">self employed</option>
+        <option value="unemployed ">unemployed</option>
+        <option value="student ">student</option>
+       
+      </select>
+        <!-- <select
+        type="text"
+        class="form-control"
+        name="careerBreak"
+        [(ngModel)]= "Signin.careerBreak"
+        
+        #careerBreak="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && careerBreak.errors }"
+      >
+      <option value="0">no career break</option>
+      <option value="0-2 ">0-2 years</option>
+      <option value="2+ ">more than 2 years</option>
+     
+    </select> -->
+        <!-- <div *ngIf="f.submitted && employmentStatus.errors" class="invalid-feedback"> -->
+          <!-- <div *ngIf="employmentStatus.errors['required']">CONTACT NUMBER is required</div> -->
         <!-- </div> -->
       </div>
       
@@ -115,7 +146,7 @@
 
         <div class="input-group">
       <div class="form-group col-md-6" >
-        <label>10th Marks</label>
+        <label>10th Marks(%)</label>
         <input
           type="text"
           class="form-control"
@@ -137,17 +168,34 @@
           class="form-control"
           name="Mark12"
           [(ngModel)]= "Signin.educationMarks.Mark12"
-          
+          pattern="[0-9]{2}"
           #Mark12="ngModel"
           [ngClass]="{ 'is-invalid': f.submitted && Mark12.errors }"
         />
-        <!-- <div *ngIf= "f.submitted && qualification.errors" class="invalid-feedback">
-          <div *ngIf= "qualification.errors['required']">DWMS ID is required</div>
-        </div> -->
+        <div *ngIf= "f.submitted && Mark12.errors" class="invalid-feedback">
+          <div *ngIf= "Mark12.errors['pattern']">value entered not correct</div>
+        </div>
       </div>
     </div>
     <div class="form-group ">
-      <label>Highest qualification Mark</label>
+      <label>Enter Year of passout</label>
+      <input
+        type="text"
+        class="form-control"
+        name="YearOfPassout"
+        pattern = "[0-9]{4}"
+        [(ngModel)]= "Signin.YearOfPassout"
+        
+        #YearOfPassout="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && YearOfPassout.errors }"
+      />
+      <div *ngIf= "f.submitted && YearOfPassout.errors" class="invalid-feedback">
+        <div *ngIf= "YearOfPassout.errors['pattern']">please input the year of passout properly</div>
+      </div>
+    </div>
+
+    <div class="form-group ">
+      <label>Highest qualification Mark(%)</label>
       <input
         type="text"
         class="form-control"
@@ -194,7 +242,7 @@
 
       <div class="form-group">
         <label>Do you have a career break</label>
-        <input
+        <select
           type="text"
           class="form-control"
           name="careerBreak"
@@ -202,13 +250,26 @@
           
           #careerBreak="ngModel"
           [ngClass]="{ 'is-invalid': f.submitted && careerBreak.errors }"
-        />
-        <div *ngIf= "f.submitted && careerBreak.errors" class="invalid-feedback">
-          <div *ngIf= "careerBreak.errors['required']">COURSE OPTED is required</div>
+        >
+        <option value="0">no career break</option>
+        <option value="0-2 ">0-2 years</option>
+        <option value="2+ ">more than 2 years</option>
+       
+      </select>
+      
+         <div *ngIf= "f.submitted && careerBreak.errors" class="invalid-feedback">
+          <div *ngIf= "careerBreak.errors['required']">please fill in the details</div>
         </div>
-      </div>
+      </div> 
       
-      
+      <!-- <select  type="text"class="form-control" name="Coursestatus"[(ngModel)]="Signin.courseStatus"
+        #Coursestatus="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && Coursestatus.errors }"
+          >
+          <option value="Ongoing">Ongoing</option>
+          <option value="Finished">Finished</option>
+         
+        </select> -->
   
       <!-- <div class="form-group">
         <label>YOUR STREAM</label>

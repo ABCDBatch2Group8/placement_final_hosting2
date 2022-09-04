@@ -10,12 +10,13 @@ import { Router } from '@angular/router';
 export class StudFormP2Component implements OnInit {
   Signin={
     courseStatus:'' ,
-    ictMarks:'',
+    ictMarks:Number,
     location:'',
     readyToRelocate:'',
     employmentStatus:'',
     careerBreak:'',
-    educationMarks:{Mark10:'',Mark12:'', QualificationMark:''}
+    educationMarks:{Mark10:Number,Mark12:Number , QualificationMark:Number },
+    YearOfPassout:Number
   }
    // skill:{type:String}
     // non required groups below

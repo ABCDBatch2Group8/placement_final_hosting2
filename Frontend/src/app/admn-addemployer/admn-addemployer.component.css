@@ -1,0 +1,21 @@
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+.errdisplay{
+  color:red; 
+  margin-left:10px;
+}
+.errdisplay div{
+  font-size: small;
+}
+.centeredbox {  
+  position: fixed;
+  top: 30%;
+  left: 4%;   
+}
+.alrtbox{
+  background-color: rgb(64, 186, 243);
+}

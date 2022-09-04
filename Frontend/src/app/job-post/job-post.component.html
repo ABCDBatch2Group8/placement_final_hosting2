@@ -1,13 +1,28 @@
 <app-emp-dashboard></app-emp-dashboard>
+<div class="slider-area ">
+  <div class="single-slider section-overly d-flex align-items-center"  style="height:150px!important;">
+      <div class="container">
+          <div class="row">
+              <div class="col-xl-12">
+                  <div class="hero-cap text-center">
+                      <h2>Post a new requirement</h2>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="container">
 <form
     name="form"
     #f="ngForm"
     (ngSubmit)="f.form.valid && AddJob()"
     novalidate>
     <div class="form-group">
-      <label>Job Id</label>
+      <!-- <label>Job Id</label> -->
       <input
         type="text"
+        placeholder="Job Id"
         class="form-control"
         name="jobid"
         [(ngModel)]="addJob.jobid"
@@ -21,9 +36,10 @@
     </div>
 
     <div class="form-group">
-        <label>Position</label>
+        <!-- <label>Position</label> -->
         <input
           type="text"
+          placeholder="Position"
           class="form-control"
           name="position"
           [(ngModel)]="addJob.position"
@@ -36,9 +52,10 @@
         </div>
       </div>
       <div class="form-group">
-        <label>Job description</label>
+        <!-- <label>Job description</label> -->
         <input
           type="text"
+          placeholder="Job description"
           class="form-control"
           name="jd_text"
           [(ngModel)]="addJob.jd_text"
@@ -51,9 +68,10 @@
         </div>
       </div>
       <div class="form-group">
-        <label>No. of positions</label>
+        <!-- <label>No. of positions</label> -->
         <input
           type="text"
+          placeholder="Number of positions"
           class="form-control"
           name="number"
           [(ngModel)]="addJob.number"
@@ -67,9 +85,10 @@
       </div>
 
       <div class="form-group">
-        <label>Salary</label>
+        <!-- <label>Salary</label> -->
         <input
           type="text"
+          placeholder="Salary"
           class="form-control"
           name="salary"
           [(ngModel)]="addJob.salary"
@@ -77,9 +96,20 @@
       </div>
 
       <div class="form-group">
-        <label>Location</label>
+      <ng-multiselect-dropdown
+            [placeholder]="'skills'"
+            [settings]="dropdownSettings"
+            [data]="dropdownList"
+             [(ngModel)]="selectedItems"
+             name = "skills">
+        </ng-multiselect-dropdown>
+      </div>
+
+      <div class="form-group">
+        <!-- <label>Location</label> -->
         <input
           type="text"
+          placeholder="Location"
           class="form-control"
           name="location"
           [(ngModel)]="addJob.location"
@@ -92,9 +122,10 @@
         </div>
       </div>
       <div class="form-group">
-        <label>Start date</label>
+        <!-- <label>Start date</label> -->
         <input
           type="text"
+          placeholder="Application open date"
           class="form-control"
           name="start_date"
           [(ngModel)]="addJob.start_date"
@@ -107,9 +138,10 @@
         </div>
       </div>
       <div class="form-group">
-        <label>End Date</label>
+        <!-- <label>End Date</label> -->
         <input
           type="text"
+          placeholder="Application close date"
           class="form-control"
           name="end_date"
           [(ngModel)]="addJob.end_date"
@@ -126,4 +158,5 @@
         <button type="submit" class="btn btn-primary">Register</button>
       </div>
     </form>
+    </div>
 

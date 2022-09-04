@@ -12,23 +12,45 @@ export class AdmnEmpprofileComponent implements OnInit {
 
   employerview:any;
   employeredit:any;
+  jobslist : any;
+  jobprofile : any;
+
+  pvjobtitle  = '';
+  pvjobcompany = '';
+  pvjobjd = '';
+  pvjobopening = '';
+  pvjobsalary = '';
+  pvjobskills:any;
+  pvjoblocation = '';
+  pvjobsdate = '';
+  pvjobedate = '';
 
   phoneinvalid:any;
   gstinvalid:any;
   frmerrorview:any;
 
   displayStyle = "none";
+  emptyJoblist  = "";
+  previewStyle = "none";
 
   constructor(private http: HttpClient, private admnemployer : AdmnEmployerService, private route : Router) { }
 
   ngOnInit(): void {
 
-    let empid = localStorage.getItem('editEmployerId');   
+    // let empid = localStorage.getItem('editEmployerId');   
+    let empid = localStorage.getItem('EmpId'); 
     this.admnemployer.setEmpProfile(empid).subscribe((data)=>{
     this.employerview=JSON.parse(JSON.stringify(data));
     this.employeredit = JSON.parse(JSON.stringify(data));
     //localStorage.removeItem('editEmployerId')            
     })
+    //Set employers Jobs list
+    this.admnemployer.setEmpJoblist(empid).subscribe((jobdata)=>{
+      if(jobdata==""){
+        this.emptyJoblist = "No Jobs found posted";
+      }
+      this.jobslist=JSON.parse(JSON.stringify(jobdata));                 
+      })
   }  
 
   updateEmployer(){
@@ -55,15 +77,34 @@ export class AdmnEmpprofileComponent implements OnInit {
     }
     else{
       this.admnemployer.updateEmployer(this.employeredit);
-      this.displayStyle = "block";   
-      
+      this.displayStyle = "block";       
     }
 
+  }
+
+  previewJob(jobid:any){
+    this.admnemployer.previewJob(jobid).subscribe((jobinfo)=>{
+      this.jobprofile = JSON.parse(JSON.stringify(jobinfo)); 
+      this.pvjobtitle = this.jobprofile.position; 
+      this.pvjobcompany = this.jobprofile.company; 
+      this.pvjobopening = this.jobprofile.number; 
+      this.pvjobsdate = this.jobprofile.start_date;
+      this.pvjobedate = this.jobprofile.end_date; 
+      this.pvjoblocation = this.jobprofile.location; 
+      this.pvjobsalary = this.jobprofile.salary; 
+      this.pvjobjd = this.jobprofile.jd_text; 
+      this.pvjobskills = this.jobprofile.skills;     
+    })
+    this.previewStyle = "block";
   }
 
   closePopup() {
     this.displayStyle = "none";
     this.route.navigate(['admin/employer']);
+  }
+
+  closePreview() {
+    this.previewStyle = "none";    
   }
 
 }

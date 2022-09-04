@@ -18,6 +18,7 @@ export class EmpSignupComponent implements OnInit {
   ngOnInit(): void {
   }
   AddEmp(){
+    console.log("In AddEmp")
     this.empService.newEmps(this.addEmp);
     this.router.navigate(['employer/login']);
     Swal.fire({
@@ -34,7 +35,6 @@ export class EmpSignupComponent implements OnInit {
         toast.addEventListener('mousecenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
-
     })
   }
   onReset(form: NgForm): void {

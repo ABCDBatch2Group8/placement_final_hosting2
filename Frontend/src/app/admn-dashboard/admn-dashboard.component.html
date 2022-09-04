@@ -16,7 +16,7 @@
     </div>
     <!-- Hero Area End -->
     
-    <div class="job-listing-area pt-30 pb-120">
+    <div class="job-listing-area pt-30 pb-20">
         <div class="container">
             <div class="row">
                 <!-- Left content -->
@@ -39,6 +39,7 @@
                                     <div class="info-box">
                                         <span class="info-box-icon bg-aqua"><i class="fa fa-university"></i></span>                        
                                         <div class="info-box-content brd-aqua">
+                                            <h3>{{countEmployers}}</h3>
                                         <h5>Employers</h5>                                   
                                         </div>                                        
                                     </div>
@@ -46,40 +47,49 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <a routerLink="../candidates">
+                                    <a routerLink="../employer">
                                     <div class="info-box">
-                                        <span class="info-box-icon bg-blu"><i class="fa fa-users"></i></span>                        
-                                        <div class="info-box-content brd-blu">
-                                        <h5>Students</h5>                                   
+                                        <span class="info-box-icon bg-blu"><i class="fa fa-cubes"></i></span>                        
+                                        <div class="info-box-content brd-blu" style="padding:10px;">
+                                            <h3>{{activeEmployers}}</h3>
+                                         
+                                        <h5>Active Employers</h5>                                  
                                         </div>                                        
                                     </div>
                                 </a>
                                 </div>
 
                                 <div class="col-md-4">
+                                    <a routerLink="../candidates">
                                     <div class="info-box">
-                                        <span class="info-box-icon bg-ylo"><i class="fa fa-suitcase"></i></span>                        
+                                        <span class="info-box-icon bg-ylo"><i class="fa fa-users"></i></span>                        
                                         <div class="info-box-content brd-ylo">
-                                        <h5>Jobs</h5>                                   
+                                            <h3>{{studentCount}}</h3>
+                                        <h5>Students</h5>                                   
                                         </div>                                        
                                     </div>
+                                </a>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4">
+                                    <a routerLink="../joblist">
                                     <div class="info-box">
-                                        <span class="info-box-icon bg-ylo"><i class="fa fa-sticky-note"></i></span>                        
+                                        <span class="info-box-icon bg-ylo"><i class="fa fa-suitcase"></i></span>                        
                                         <div class="info-box-content brd-ylo">
-                                        <h5>Applications</h5>                                   
+                                            <h3>{{jobsCount}}</h3>
+                                        <h5>Jobs</h5>                                   
                                         </div>                                        
                                     </div>
+                                    </a>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="info-box">
                                         <span class="info-box-icon bg-aqua"><i class="fa fa-id-card"></i></span>                        
                                         <div class="info-box-content brd-aqua">
+                                            <h3>0</h3>
                                         <h5>Placements</h5>                                   
                                         </div>                                        
                                     </div>
@@ -89,6 +99,7 @@
                                     <div class="info-box">
                                         <span class="info-box-icon bg-blu"><i class="fa fa-list"></i></span>                        
                                         <div class="info-box-content brd-blu">
+                                            <h3>0</h3>
                                         <h5>Shortlists</h5>                                   
                                         </div>                                        
                                     </div>

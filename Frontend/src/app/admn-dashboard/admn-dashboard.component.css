@@ -14,11 +14,11 @@
     border-bottom-left-radius: 2px;
     display: block;
     float: left;
-    height: 90px;
+    height: 122px;
     width: 90px;
     text-align: center;
     font-size: 45px;
-    line-height: 90px;
+    line-height: 122px;
     background: rgba(0,0,0,0.2);
     background-color: rgba(0, 0, 0, 0.2);
     color: #fff;
@@ -35,8 +35,11 @@
 .info-box-content {
   margin: auto;
   width: 100%;  
-  padding: 26px; 
+  padding: 22px; 
   text-align: center;  
+}
+.info-box-content h3{
+    color: #b40811;
 }
 .brd-aqua{
     border: 3px solid #00c0ef;

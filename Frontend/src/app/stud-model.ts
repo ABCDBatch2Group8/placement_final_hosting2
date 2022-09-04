@@ -7,6 +7,7 @@ export class studModel {
         public courseInICT :String,
         public qualification :String,
         public stream : String,
-        public password : String
+        public password : String,
+        public resume :String
     ){}
 }

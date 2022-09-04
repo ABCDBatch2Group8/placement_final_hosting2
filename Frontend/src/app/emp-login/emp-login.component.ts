@@ -29,6 +29,7 @@ export class EmpLoginComponent implements OnInit {
             //  console.log("res.token is",res.token)
             if (res.status == "success") {
               localStorage.setItem("EmpId",res.eid);
+              localStorage.setItem("EmpComp",res.company);
               this.router.navigate(['employer/dashboard'])
             }
             else{

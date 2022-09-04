@@ -1,5 +1,5 @@
 
-<div class="whole-wrap">
+<!-- <div class="whole-wrap">
     <div class="container box_1170">
         
     <div class="section-top-border">
@@ -19,13 +19,13 @@
             </blockquote>
         </div>
     </div> 
-</div> 
+ </div> 
 
 
 
 
 
-</div>
+</div> -->
 <div class="container col-lg-7 ">
     <!-- <div class="text-center mb-5">
         
@@ -45,11 +45,11 @@
                 <div class="col"><p><i class="fas fa-map-marker-alt"></i><small>{{item.location}}</small></p></div>
             </div>
         <div class=" text-uppercase text-secondary">
-        <p><i class="fas fa-file-alt" aria-hidden="true"></i><small>{{item.jd_text}}</small></p>
+        <p class="txt"><i class="fas fa-file-alt" aria-hidden="true"></i><small>{{item.jd_text}}</small></p>
         <!-- <small class="d-block">247</small> -->
         </div>
         <div class="text-uppercase text-primary">
-            <a href="#" class="genric-btn success-border medium">view details<span
+            <a (click)= onClick(item._id) routerLink="/student/apply" class="genric-btn success-border medium">view details<span
                 class="lnr lnr-arrow-right"></span></a>
                 <div style="height: 10px;"></div>
         </div>  

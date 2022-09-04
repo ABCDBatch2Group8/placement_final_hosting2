@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AdmnEmployerService } from '../admn-employer.service';
 import { Router } from '@angular/router';
-import { DataTablesModule } from 'angular-datatables';
 
 
 @Component({
@@ -18,7 +17,12 @@ export class AdmnEmployerComponent implements OnInit {
   posts: any;
 
   displayStyle = "none";
+  statsetStyle = "none";
+  statusLabel = "";
   removerreferer:any;
+
+  statsetreferer:any;
+  statsetval = "";
 
   delstat:any;
 
@@ -54,9 +58,37 @@ export class AdmnEmployerComponent implements OnInit {
     this.displayStyle = "block";      
   }
 
+  setstatEmployer(employer:any,curstat:any){
+   if(curstat=='N'){
+    this.statusLabel = "Disable";
+    this.statsetval = 'Y';
+   }
+   else{
+    this.statusLabel = "Activate";
+    this.statsetval = 'N';
+   }
+
+   this.statsetreferer = employer._id;
+    
+    this.statsetStyle = "block";
+  }
+
   closePopup() {
     this.displayStyle = "none";    
   }
+
+  closeStatpop() {
+    this.statsetStyle = "none";    
+  }
+  
+  resetEmpStat(empstatid:any,setstat:any){
+    //alert(setstat); resetEmployer
+    this.admnemployer.resetEmployer(empstatid,setstat).subscribe((data)=>{
+     this.posts = JSON.parse(JSON.stringify(data));                  
+    }) 
+    this.statsetStyle= "none"; 
+  }
+  
   
   processdelete(empremid:any){
     //alert(empremid); 

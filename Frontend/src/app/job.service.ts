@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,47 @@ export class JobService {
       console.log("res is", res);
     })
     }
+  getJobs(){
+    return this.http.get<any>(`${this.server_address}/job/joblist`)
+  }
 
+  jobDetails(id:any){
+    return this.http.get<any>(`${this.server_address}/job/jobview/`+id)
+  }
+
+  editJob(job:any){
+    console.log("Job update");
+    return this.http.put<any>(`${this.server_address}/job/edit/`,job)
+    .subscribe(data => {console.log(data)})
+  }
+  
+  year_shortlist(year:any){
+    return this.http.get<any>(`${this.server_address}/job/sl/year`+year)
+  }
+ 
+  skill_shortlist(){
+    return this.http.get<any>(`${this.server_address}/job/sl/skill`)
+  }
+
+  course_shortlist({params}:any){
+    return this.http.get<any>(`${this.server_address}/job/sl/course`,{params})
+  }
+
+  ys_shortlist(year:any){
+    return this.http.get<any>(`${this.server_address}/job/sl/ys`+year)
+  }
+
+  sc_shortlist({params}:any){
+    return this.http.get<any>(`${this.server_address}/job/sl/sc`,{params})
+  }
+
+  cy_shortlist({params}:any){
+    return this.http.get<any>(`${this.server_address}/job/sl/cy`,{params})
+  }
+
+  ysc_shortlist({params}:any){
+    return this.http.get<any>(`${this.server_address}/job/sl/csy`,{params})
+  }
 
 }
-
 
