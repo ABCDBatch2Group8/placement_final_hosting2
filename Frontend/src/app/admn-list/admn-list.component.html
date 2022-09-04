@@ -47,8 +47,9 @@
                             <tr *ngFor="let i of admin">                          
                               <td>{{i.designation}}</td>
                               <td>{{i.email}}</td>
-                              <td><a  class="genric-btn danger circle fnbtn" (click)="status()">enable</a></td>
-                              <td><a  class="genric-btn danger circle fnbtn" (click)="reset(i)">Reset</a></td>
+                              <td><a  class="genric-btn primary circle fnbtn" (click)="status(i,'Enable')" *ngIf="i.status==='Enable'"><i class="fa fa-check" aria-hidden="true"></i></a>
+                              <a  class="genric-btn info circle fnbtn" (click)="status(i,'Disable')" *ngIf="i.status!=='Enable'"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                              <td><a  class="genric-btn success circle fnbtn" (click)="reset(i)">Reset</a></td>
                             </tr>
                               
                           </tbody>

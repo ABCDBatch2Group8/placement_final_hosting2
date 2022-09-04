@@ -84,6 +84,7 @@
                             placeholder="Password"
                             onfocus="this.placeholder = ''" onBlur="this.placeholder = 'Password'" 
                             >
+                            <span >Must be of min length 8, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.</span>
                             <div *ngIf="adminForm.submitted && password.errors" class="invalid-feedback">
                                 <div *ngIf="password.errors['required']">Password is required</div>
                                 <div *ngIf="password.errors['minlength']">
@@ -100,7 +101,7 @@
                             <br>
                             <button type="submit" class="genric-btn success circle" [disabled]="adminForm.form.invalid">OK</button> &nbsp;
                             <button type="submit" (click)="onReset(adminForm)"
-                            class="genric-btn info circle">Reset</button>
+                            class="genric-btn info circle">Clear</button>
                            </form>
                            
                            <br>

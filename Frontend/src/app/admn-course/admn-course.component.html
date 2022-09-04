@@ -76,15 +76,29 @@
           <form  #submit="ngForm" (ngSubmit)="newCourse()">
                   <div class="form-group">
                       <label for="">Course</label>
-                      <input type="course" name="course" class="form-control"[(ngModel)]="Course.course"  required>
+                      <input 
+                      type="text" 
+                      name="course" 
+                      class="form-control"
+                      [(ngModel)]="Course.course" 
+                      #course="ngModel" 
+                      [class.is-invalid]="course.touched"
+                      required>
                   </div>
                   <div class="form-group">
                       <label for="">Category</label>
-                      <input type="category" name="category" class="form-control"[(ngModel)]="Course.category"  required>
+                      <input 
+                      type="text" 
+                      name="category" 
+                      class="form-control"
+                      [(ngModel)]="Course.category" 
+                      #category="ngModel"
+                      [class.is-invalid]="category.touched" 
+                      required> 
                   </div>
               <br>
-              <button type="button" class="btn btn-primary" [disabled]="submit.form.invalid" >Submit</button>&nbsp;
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary"  >Submit</button>&nbsp;
+              <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button> -->
               </form>
         </div>
       </div>

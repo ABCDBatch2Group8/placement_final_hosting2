@@ -18,19 +18,28 @@ export class AdmnAuthService {
     return this.http.post('http://localhost:3000/admin/login',admin)
   }
   newAdmin(admin:any){
+    alert(admin)
     return this.http.post('http://localhost:3000/admin/signup',admin)
     .subscribe(data=>{
       console.log(data);
     })
   }
-  editAdmin(){
+  editAdmin(id:any,password:any){
     
+    return this.http.put("http://localhost:3000/admin/reset/"+id,{password})
+    .subscribe(data =>{console.log(data)})
+  }
+  statusAdmin(id:any,status:any)
+  {
+    alert(status)
+    return this.http.put("http://localhost:3000/admin/status/"+id,{status})
+    .subscribe(data =>{console.log(data)})
   }
   newStudent(stud:any){
-    
+    alert('yes')
     return this.http.post('http://localhost:3000/admin/addictkstudent',stud)
     .subscribe(data=>{
-      console.log(data);
+      
     })
   }
   newCourse(course:any){

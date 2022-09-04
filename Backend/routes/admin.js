@@ -27,7 +27,7 @@ router.post('/login',async(req,res)=>{
         console.log('........usermail.....')
         console.log(admindata.email)
         console.log(admindata.password)
-        if(admindata.password===password)
+        if(admindata.password===password && admindata.status==='Enable')
         {
             
             // let payload = {subject:email+password}
@@ -85,6 +85,26 @@ router.post('/signup',(req,res)=>{
         })
       })
 
+      //RESET ADMIN PASSWORD
+      router.put('/reset/:id',(req,res)=>{
+        let id =req.params.id;
+        let pwd=req.body.password;
+        adminModel.findByIdAndUpdate({"_id":id},{$set:{"password":pwd}})
+        .then(function(){
+            res.send();
+            
+      })
+    })
+    //Change status
+    router.put('/status/:id',(req,res)=>{
+        let id =req.params.id;
+        let status=req.body.status;
+        console.log(status)
+        adminModel.findByIdAndUpdate({"_id":id},{$set:{"status":status}})
+        .then(function(){
+            res.send();    
+      })
+    })
       //CREATE ICTK STUDENT EMAIL ID
 
       router.post('/addictkstudent',(req,res)=>{
@@ -92,9 +112,9 @@ router.post('/signup',(req,res)=>{
         const newstud={
             firstname:req.body.firstname,
             lastname:req.body.lastname,
-            email:req.body.email,
-            
+            email:req.body.email
            }
+           console.log(newstud)
            var student=new ictkStudModel(newstud);
            student.save();
 
@@ -134,7 +154,7 @@ router.post('/signup',(req,res)=>{
             
 // CREATE ICTK COURSE LIST
 router.post('/course',(req,res)=>{
-    console.log(req.body)
+    console.log(req.body.course)
     const newCourse={
         course:req.body.course,
         category:req.body.category

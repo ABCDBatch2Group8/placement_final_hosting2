@@ -45,6 +45,7 @@ this.http.get<any>("http://localhost:3000/admin/showcourse").subscribe(
 )
 }
 newCourse(){
+
   const newcourse={
     course:this.Course.course,
     category:this.Course.category,
@@ -61,6 +62,7 @@ closePopup() {
   this.displayStyle = "none";    
 }
 toDelete(courseid:any){
+  
   this.admn.deleteCourse(courseid).subscribe((data)=>{
     this.course=JSON.parse(JSON.stringify(data))
     this.displayStyle = "none"; 
