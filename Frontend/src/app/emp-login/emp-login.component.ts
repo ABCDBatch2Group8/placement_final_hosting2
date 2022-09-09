@@ -4,6 +4,7 @@ import { EmpModel } from '../emp.model';
 import { EmpService } from '../emp.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2'
+import { HeaderService } from '../header.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class EmpLoginComponent implements OnInit {
     "password":''
   };
 
-  constructor(private empService: EmpService, private router: Router) { }
+  constructor(private headservice : HeaderService,private empService: EmpService, private router: Router) { }
 
   EmpLogin(){
     console.log("In employer service");
@@ -30,6 +31,7 @@ export class EmpLoginComponent implements OnInit {
             if (res.status == "success") {
               localStorage.setItem("EmpId",res.eid);
               localStorage.setItem("EmpComp",res.company);
+              localStorage.setItem("AuthUser","employer");
               this.router.navigate(['employer/dashboard'])
             }
             else{
@@ -56,6 +58,6 @@ export class EmpLoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.headservice.setMenu("general");
   }
-
 }

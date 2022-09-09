@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudAuthService } from '../stud-auth.service';
 import { Router } from '@angular/router';
+import { HeaderService } from '../header.service';
 
 @Component({
   selector: 'app-stud-form-p2',
@@ -34,9 +35,10 @@ export class StudFormP2Component implements OnInit {
    // careerBreak : {type : String},
    // breakDuration : {type:Number}  (no need)
 
-  constructor(private _auth:StudAuthService) { }
+  constructor(private _auth:StudAuthService ,private headservice : HeaderService) { }
 
   ngOnInit(): void {
+    this.headservice.setMenu("student");
   //   this._auth.course().subscribe((data)=>{
   //     // this.Course=JSON.parse(JSON.stringify(data));
   //     console.log(data)

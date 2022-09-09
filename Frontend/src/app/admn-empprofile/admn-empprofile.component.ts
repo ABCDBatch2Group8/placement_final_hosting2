@@ -33,12 +33,15 @@ export class AdmnEmpprofileComponent implements OnInit {
   emptyJoblist  = "";
   previewStyle = "none";
 
+  jobdelStyle = "none";
+  removerreferer:any;
+
   constructor(private http: HttpClient, private admnemployer : AdmnEmployerService, private route : Router) { }
 
   ngOnInit(): void {
 
-    // let empid = localStorage.getItem('editEmployerId');   
-    let empid = localStorage.getItem('EmpId'); 
+    let empid = localStorage.getItem('editEmployerId');   
+    //let empid = localStorage.getItem('EmpId');    
     this.admnemployer.setEmpProfile(empid).subscribe((data)=>{
     this.employerview=JSON.parse(JSON.stringify(data));
     this.employeredit = JSON.parse(JSON.stringify(data));
@@ -82,6 +85,10 @@ export class AdmnEmpprofileComponent implements OnInit {
 
   }
 
+  listApplications(jobid:any){    
+    this.route.navigate(['admin/applications',jobid]);
+  }
+
   previewJob(jobid:any){
     this.admnemployer.previewJob(jobid).subscribe((jobinfo)=>{
       this.jobprofile = JSON.parse(JSON.stringify(jobinfo)); 
@@ -106,5 +113,43 @@ export class AdmnEmpprofileComponent implements OnInit {
   closePreview() {
     this.previewStyle = "none";    
   }
+
+  delJobrecord(jobid:any){
+    this.removerreferer = jobid;
+    this.jobdelStyle = "block";      
+  }
+
+  closeDelup() {
+    this.jobdelStyle = "none";    
+  }
+
+  processdelete(jobid:any){
+    //alert(jobid); 
+    this.admnemployer.deleteJob(jobid).subscribe((jobdata:any)=>{
+    if(jobdata==""){
+    this.emptyJoblist = "No Jobs found posted";
+    }
+    this.jobslist=JSON.parse(JSON.stringify(jobdata));                  
+    }) 
+    this.jobdelStyle = "none"; 
+    //Reset Page
+    let empid = localStorage.getItem('editEmployerId');   
+    //let empid = localStorage.getItem('EmpId');    
+    this.admnemployer.setEmpProfile(empid).subscribe((data)=>{
+    this.employerview=JSON.parse(JSON.stringify(data));
+    this.employeredit = JSON.parse(JSON.stringify(data));
+    //localStorage.removeItem('editEmployerId')            
+    })
+    //Set employers Jobs list
+    this.admnemployer.setEmpJoblist(empid).subscribe((jobdata)=>{
+      if(jobdata==""){
+        this.emptyJoblist = "No Jobs found posted";
+      }
+      this.jobslist=JSON.parse(JSON.stringify(jobdata));                 
+      })
+    
+
+    this.route.navigate(['admin/empsettings']);  
+  } 
 
 }

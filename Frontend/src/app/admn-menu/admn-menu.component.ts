@@ -5,11 +5,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './admn-menu.component.html',
   styleUrls: ['./admn-menu.component.css']
 })
-export class AdmnMenuComponent implements OnInit {
-
+export class AdmnMenuComponent implements OnInit { 
+   
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
+   
   }
 
 }

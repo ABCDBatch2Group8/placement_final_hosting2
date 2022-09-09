@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderService } from '../header.service';
 
 @Component({
   selector: 'app-stud-contact-uspage',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudContactUspageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private headservice : HeaderService) { }
 
   ngOnInit(): void {
+    this.headservice.setMenu("student");
   }
 
 }

@@ -4,6 +4,7 @@ import { EmpModel } from '../emp.model';
 import { EmpService } from '../emp.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2'
+import { HeaderService } from '../header.service';
 
 @Component({
   selector: 'app-emp-profile',
@@ -14,9 +15,10 @@ export class EmpProfileComponent implements OnInit {
 
   EmpProf = new EmpModel('','','','','','');
 
-  constructor(private empService: EmpService, private router: Router) { }
+  constructor(private headservice : HeaderService,private empService: EmpService, private router: Router) { }
 
   ngOnInit(): void {
+    this.headservice.setMenu("employer");
     let empId = localStorage.getItem("EmpId");
     this.empService.empProf(empId).subscribe((data:any)=>{
       this.EmpProf = JSON.parse(JSON.stringify(data));

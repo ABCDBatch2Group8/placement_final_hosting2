@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderService } from '../header.service';
 
 @Component({
   selector: 'app-employer',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private headservice : HeaderService) { }
 
   ngOnInit(): void {
+    this.headservice.setMenu("general");
   }
 
 }

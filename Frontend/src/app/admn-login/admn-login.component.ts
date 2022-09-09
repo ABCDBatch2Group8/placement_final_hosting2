@@ -3,17 +3,19 @@ import { AdmnAuthService } from '../admn-auth.service';
 import { Router } from '@angular/router';
 import { HeaderService } from '../header.service';
 import Swal from 'sweetalert2'
-
-
 @Component({
   selector: 'app-admn-login',
   templateUrl: './admn-login.component.html',
   styleUrls: ['./admn-login.component.css']
 })
 export class AdmnLoginComponent implements OnInit {
-
   email!:string
   password!:string
+  constructor(
+    private admnauth:AdmnAuthService,
+    private router:Router,
+    private headservice : HeaderService
+    ) { }
 
   constructor(
     private admnauth:AdmnAuthService,

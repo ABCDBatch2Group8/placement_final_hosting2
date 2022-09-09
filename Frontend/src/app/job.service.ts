@@ -13,12 +13,12 @@ export class JobService {
   newJobs(addjob: any) {
     console.log("addemp", addjob)
     return this.http.post<any>(`${this.server_address}/job/jobpost`, { "Job": addjob })
-    .subscribe(res =>{
-      console.log("res is", res);
-    })
+    // .subscribe(res =>{
+    //   console.log("res is", res);
+    // })
     }
-  getJobs(){
-    return this.http.get<any>(`${this.server_address}/job/joblist`)
+  getJobs(empref:any){
+    return this.http.get<any>(`${this.server_address}/job/joblist/`+empref)
   }
 
   jobDetails(id:any){
@@ -31,32 +31,41 @@ export class JobService {
     .subscribe(data => {console.log(data)})
   }
   
-  year_shortlist(year:any){
-    return this.http.get<any>(`${this.server_address}/job/sl/year`+year)
+  year_shortlist(params:any){
+    return this.http.get<any>(`${this.server_address}/job/sl/year`,{params})
   }
  
-  skill_shortlist(){
-    return this.http.get<any>(`${this.server_address}/job/sl/skill`)
+  skill_shortlist(params:any){
+    return this.http.get<any>(`${this.server_address}/job/sl/skill`,{params})
   }
 
-  course_shortlist({params}:any){
+  course_shortlist(params:any){
     return this.http.get<any>(`${this.server_address}/job/sl/course`,{params})
   }
 
-  ys_shortlist(year:any){
-    return this.http.get<any>(`${this.server_address}/job/sl/ys`+year)
+  ys_shortlist(params:any){
+    return this.http.get<any>(`${this.server_address}/job/sl/ys`,{params})
   }
 
-  sc_shortlist({params}:any){
+  sc_shortlist(params:any){
     return this.http.get<any>(`${this.server_address}/job/sl/sc`,{params})
   }
 
-  cy_shortlist({params}:any){
+  cy_shortlist(params:any){
+    console.log("service params",params)
     return this.http.get<any>(`${this.server_address}/job/sl/cy`,{params})
   }
 
-  ysc_shortlist({params}:any){
-    return this.http.get<any>(`${this.server_address}/job/sl/csy`,{params})
+  ysc_shortlist(params:any){
+    return this.http.get<any>(`${this.server_address}/job/sl/ysc`,{params})
+  }
+  markAsShortlist(id:any){
+    console.log("In service id ",id)
+    return this.http.put<any>(`${this.server_address}/job/mark/sl`,id)
+  }
+
+  getApplicants(params:any){
+    return this.http.get<any>(`${this.server_address}/job/get/sl`,{params})
   }
 
 }

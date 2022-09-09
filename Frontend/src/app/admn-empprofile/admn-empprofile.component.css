@@ -51,9 +51,10 @@ button[disabled]{
   background-color: rgb(64, 186, 243);
 }
 .prvwbox{
-  background-color: rgb(244, 247, 248);
+  background-color: rgb(194, 250, 208);
   border-style: solid;
   border-color: #555;
+  border-radius: 15px;
 }
 .fnbtn{
   line-height: 25px!important;

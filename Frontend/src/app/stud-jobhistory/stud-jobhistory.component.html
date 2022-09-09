@@ -1,30 +1,98 @@
-<div class="container col-lg-7 ">
-    <!-- <div class="text-center mb-5">
+<div class="slider-area ">
+  <div class="single-slider section-overly d-flex align-items-center"  style="height:150px!important;">
+      <div class="container">
+          <div class="row">
+              <div class="col-xl-12">
+                  <div class="hero-cap text-center">                            
+                      <h2>Application history</h2>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="container asa col-lg-7">
+  <!-- <div class="text-center mb-5">
         
         <h1 class="text-capitalize font-weight-bold">Jobs for You</h1>
     </div> -->
-    <h4 class="text-capitalize font-weight-bold text-primary mb-5 display-block ">Applied Jobs</h4>
-
+  <h4 class="text-capitalize font-weight-bold text-primary my-5 display-block">
+    Application History
+  </h4>
+  <div class="list">
     <ng-container *ngFor="let item of jobs">
-        <div class="my-5 pl-40 py-3 bg-light  align-items-center justify-content shadow p-3 mb-5 bg-white rounded">
-        
-        <h5><span class="text-info">{{item.position}}</span></h5>
-            <!-- <h1 class="my-2 font-weight-bold">sdfs</h1>  -->
-            
-            <div class="row">
-                <div class="col"><p><i class="fas fa-rupee-sign"></i><small>{{item.salary}}</small></p></div>
-                <div class="col"><p><i class="fas fa-briefcase" aria-hidden="true"></i><small>{{item.experience}}</small></p></div>
-                <div class="col"><p><i class="fas fa-map-marker-alt"></i><small>{{item.location}}</small></p></div>
+      <div
+        class="my-5 pl-40 py-3 bg-light align-items-center justify-content shadow p-3 mb-5 bg-white rounded"
+      >
+        <h5>
+          <span class="text-info">{{ item.position }}</span>
+        </h5>
+        <!-- <h1 class="my-2 font-weight-bold">sdfs</h1>  -->
+
+        <div class="row">
+          <div class="col">
+            <p>
+              <i class="fas fa-rupee-sign text-warning"></i>{{ item.salary }}
+            </p>
+          </div>
+          <div class="col">
+            <p>
+              <i class="fas fa-briefcase text-secondary" aria-hidden="true"></i
+              >{{ item.experience }}
+            </p>
+          </div>
+          <div class="col">
+            <p>
+              <i class="fas fa-map-marker-alt text-primary"></i
+              >{{ item.location }}
+            </p>
+          </div>
+        </div>
+        <div class="text-uppercase text-secondary">
+          <p class="txt">
+            <i class="fas fa-file-alt" aria-hidden="true"></i
+            ><small>{{ item.jd_text }}</small>
+          </p>
+
+          <div class="row">
+            <ng-container  *ngFor="let ite of item.applicants">
+            <div class="col">
+              
+              <p *ngIf="ite.application_status =='shortlisted'&&stu == ite.stud_ref">
+                <i class="fas fa-check-circle" aria-hidden="true"></i
+                  
+                ><small class="text-primary"> {{ite.application_status}}</small>
+              </p>
             </div>
-        <div class=" text-uppercase text-secondary">
-        <p class="txt"><i class="fas fa-file-alt" aria-hidden="true"></i><small>{{item.jd_text}}</small></p>
-        <!-- <small class="d-block">247</small> -->
+            
+          </ng-container>
+            <!-- <div class="col">
+              <p>
+                <i class="fas fa-check-circle"></i
+                ><small class="text-primary">Application Status</small>
+              </p>
+            </div> -->
+            <div>
+              <!-- <ng-container  *ngFor="let ite of item.applicants"> -->
+                <!-- <p>{{ite.application_status}}</p> -->
+                 <!-- <p  *ngIf="ite.application_status =='shortlisted'">{{ite.application_status}}</p> -->
+                <!-- <ng-template #asa> not shortlisted</ng-template> -->
+              <!-- </ng-container> -->
+            </div>
+          </div>
+          <!-- <small class="d-block">247</small> -->
         </div>
         <div class="text-uppercase text-primary">
-            <a (click)= onClick(item._id) routerLink="/student/apply" class="genric-btn success-border medium">view details<span
-                class="lnr lnr-arrow-right"></span></a>
-                <div style="height: 10px;"></div>
-        </div>  
+          <a
+            (click)="onClick(item._id)"
+            routerLink="/student/apply"
+            class="genric-btn success-border medium"
+            >view details<span class="lnr lnr-arrow-right"></span
+          ></a>
+          <div style="height: 10px"></div>
         </div>
+      </div>
     </ng-container>
+  </div>
 </div>

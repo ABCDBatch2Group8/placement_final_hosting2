@@ -432,11 +432,11 @@ router.get('/employerjoblist/:id',function(req,res){
 //RETURN JOB DETAILS
 router.get('/jobpreview/:id',function(req,res){
     const jid = req.params.id;
-    console.log(jid);
+   // console.log(jid);
     
     jobsModels.findOne({_id: jid})
       .then((jobview)=>{
-        console.log(jobview);
+       // console.log(jobview);
           res.send(jobview);
       }); 
         
@@ -451,6 +451,91 @@ router.get('/joblistings',function(req,res){
           //console.log(joblist);
       }); 
         
+});
+
+//GET APPLICATIONS LIST FOR JOBS
+router.get('/jobapplications/:id',async(req,res)=>{
+    try{
+        const jid = req.params.id;
+        const getApp = await jobsModels.findById({ "_id": jid }, { "applicants": 1 });
+        studDetails = [];
+        try{
+            for (let i = 0; i < getApp.applicants.length; i++) {                
+                
+                const getStud = await candidateModel.findById({ "_id": getApp.applicants[i].stud_ref }, { "name": 1, "dwmsid": 1, "employmentStatus": 1, "courseInICT": 1 })
+                let id = getStud._id;
+                let smname = getStud.name;
+                let dwmsid = getStud.dwmsid;
+                let course = getStud.courseInICT;
+                if(getApp.applicants[i].shortlist_status){
+                    slstatus = "listed";
+                }
+                else{
+                    slstatus = "notlisted"; 
+                }
+                let studobj = {_id:id, name:smname, dwmsid:dwmsid, courseInICT:course, shortliststatus:slstatus};
+                                
+                //studDetails.push(getStud);
+                studDetails.push(studobj);
+               
+            }
+            console.log("studDetails", studDetails);
+            res.json(studDetails);
+
+        }catch (err) {
+        console.log("Error in Applications List");
+        console.log("error is", err)
+        res.json({ message: err })
+      }
+
+    }catch (err) {
+        console.log("Error in Applications List");
+        console.log("error is", err)
+        res.json({ message: err })
+      }
+    
+});
+
+//GET APPLICANTS DETAILS FOR JOBS
+router.post('/applnpreview',function(req,res){
+    const studids = req.body.ids;
+    //console.log(studid);
+
+    candidateModel.find({ '_id': { $in: studids } }, {name:1, dwmsid:1, courseInICT:1})
+      .then((studlist)=>{
+          res.send(studlist);
+          console.log(studlist);
+      }); 
+});
+
+//RETURN APPLICANT DETAILS
+router.get('/showapplicant/:id',function(req,res){
+    const sid = req.params.id;
+   // console.log(sid);
+    
+   candidateModel.findOne({_id: sid})
+      .then((studview)=>{
+       // console.log(studview);
+          res.send(studview);
+      }); 
+        
+});
+
+//DELETE JOB
+router.delete('/jobdel/:id',function(req,res){
+    const id = req.params.id;
+    //console.log(id);
+    jobsModels.findByIdAndDelete({"_id":id})
+    .then(()=>{
+        //console.log('delete success')
+        //res.send();
+        jobsModels.find()
+      .then((joblist)=>{
+          res.send(joblist);
+          //console.log(joblist);
+      }); 
+    })
+    
 });
 
 

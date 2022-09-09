@@ -4,6 +4,7 @@ import { EmpModel } from '../emp.model';
 import { EmpService } from '../emp.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2'
+import { HeaderService } from '../header.service';
 
 @Component({
   selector: 'app-emp-signup',
@@ -13,9 +14,10 @@ import Swal from 'sweetalert2'
 export class EmpSignupComponent implements OnInit {
   title: String = "Please Register!";
   addEmp = new EmpModel('','','','','','');
-  constructor(private empService: EmpService, private router: Router) { }
+  constructor(private headservice : HeaderService,private empService: EmpService, private router: Router) { }
 
   ngOnInit(): void {
+    this.headservice.setMenu("general");
   }
   AddEmp(){
     console.log("In AddEmp")

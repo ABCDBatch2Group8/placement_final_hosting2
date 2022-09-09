@@ -99,7 +99,13 @@ import { AdmnStudprofileComponent } from './admn-studprofile/admn-studprofile.co
     JobShortlistComponent,
     JobViewComponent,
     OfferAddComponent,
+<<<<<<< HEAD
     AdmnStudprofileComponent
+=======
+    AdmnJobapplicationsComponent,
+    JobApplnStatusComponent,
+    LogoutComponent
+>>>>>>> fa25254719a023a595c5162c1d5112596a2b4da4
   ],
   imports: [
     BrowserModule,

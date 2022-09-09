@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2'
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { SkillService } from '../skill.service';
+import { HeaderService } from '../header.service';
 
 @Component({
   selector: 'app-job-post',
@@ -15,13 +16,15 @@ import { SkillService } from '../skill.service';
 export class JobPostComponent implements OnInit {
   selItems: Array<object> = [];
   addJob = new JobModel('','','','','','','',this.selItems,'',null!,null!);
-  constructor(private jobService: JobService, private skillService: SkillService, private router: Router) { }
+  constructor(private headservice : HeaderService,private jobService: JobService, private skillService: SkillService, private router: Router) { }
   dropdownList: Array<Object> = [];
   selectedItems: Array<object> = [];
   
   dropdownSettings:IDropdownSettings={};
  
   ngOnInit(): void {
+
+    this.headservice.setMenu("employer");
     // Getting skills for the dropdown from the skills collection
     this.skillService.getSkill()
         .subscribe(
@@ -52,11 +55,11 @@ AddJob(){
     console.log ("To insert in job",this.addJob)
     console.log("selitems",this.selItems)
     this.jobService.newJobs(this.addJob)
-    // .subscribe(
-    //   (res:any) => {  
-    //     alert("res.message")
-    //   })
+    .subscribe(
+      (res:any) => {  
+        alert(res.message)
+      })
     this.router.navigate(['employer/dashboard']);
-    alert ("success")
+    // alert ("success")
 }
 }

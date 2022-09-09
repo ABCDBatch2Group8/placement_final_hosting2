@@ -6,6 +6,8 @@ import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2'
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { SkillService } from '../skill.service';
+import { HeaderService } from '../header.service';
+
 
 @Component({
   selector: 'app-job-update',
@@ -15,12 +17,14 @@ import { SkillService } from '../skill.service';
 export class JobUpdateComponent implements OnInit {
   selItems: Array<object> = [];
   viewJob = new JobModel('','','','','','','',this.selItems,'',null!,null!);
-  constructor(private jobService: JobService, private skillService: SkillService, private router: Router) { }
+  constructor(private headservice : HeaderService,private jobService: JobService, private skillService: SkillService, private router: Router) { }
   dropdownList: Array<Object> = [];
   selectedItems: Array<object> = [];
   
   dropdownSettings:IDropdownSettings={};
   ngOnInit(): void {
+
+    this.headservice.setMenu("employer");
 
     let jobId = localStorage.getItem("JobId");
     this.jobService.jobDetails(jobId).subscribe((data:any)=>{

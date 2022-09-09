@@ -8,6 +8,7 @@ export class studModel {
         public qualification :String,
         public stream : String,
         public password : String,
-        public resume :String
+        public resume :String,
+        public skills: Array<any>,
     ){}
 }

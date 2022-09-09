@@ -1,0 +1,87 @@
+.tbheads li a{
+  color: black;
+  padding: 10px;
+  line-height: 30px;    
+}
+.nav-tabs > li > a:hover {
+  color: #555;
+  cursor: default;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-color: rgb(221, 221, 221);
+  border-bottom-color: transparent;
+}
+.nav-tabs > li > a:focus{
+  background-color: #ddd;
+  border-radius: 4px 4px 0 0;
+}
+.nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+.prflbox{
+  margin-top: 2px;
+  border: 1px solid #ddd;
+  border-radius: 4px 4px 0 0;
+  padding: 10px;
+}
+button:disabled,
+button[disabled]{
+border: 1px solid #999999;
+background-color: #cccccc;
+color: #666666;
+}
+.errdisplay{
+color:red; 
+margin-left:10px;
+}
+.centeredbox {  
+position: fixed;
+top: 30%;
+left: 4%;   
+}
+.alrtbox{
+background-color: rgb(64, 186, 243);
+}
+.prvwbox{
+background-color: rgb(194, 250, 208);
+border-style: solid;
+border-color: #555;
+border-radius: 15px;
+}
+.fnbtn{
+line-height: 25px!important;
+padding: 0 15px!important; 
+color: #ffffff!important;  
+}
+.fnbtn:hover{    
+color: #0f0101!important;  
+}
+.centeredbox {  
+position: fixed;
+top: 30%;
+left: 4%;   
+}
+.previewbox{
+position: fixed;
+top: 5%;
+left: 4%;
+}
+.btgreen{
+background-color: green!important;
+}
+.btgreen:hover{
+background-color: white!important;
+}
+.emptybox{
+text-align: center;
+font-size: 18px;
+margin-top: 30px;
+}

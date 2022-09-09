@@ -24,6 +24,9 @@ export class AdmnJobsComponent implements OnInit {
   pvjobsdate = '';
   pvjobedate = '';
 
+  jobdelStyle = "none";
+  removerreferer:any;
+
   constructor(private admnemployer : AdmnEmployerService, private route : Router) { }
 
   ngOnInit(): void {
@@ -34,6 +37,10 @@ export class AdmnJobsComponent implements OnInit {
       }
       this.jobslist=JSON.parse(JSON.stringify(jobdata));                 
       })
+  }
+
+  listApplications(jobid:any){    
+    this.route.navigate(['admin/applications',jobid]);
   }
 
   previewJob(jobid:any){
@@ -55,5 +62,26 @@ export class AdmnJobsComponent implements OnInit {
   closePreview() {
     this.previewStyle = "none";    
   }
+
+  delJobrecord(jobid:any){
+    this.removerreferer = jobid;
+    this.jobdelStyle = "block";      
+  }
+
+  closeDelup() {
+    this.jobdelStyle = "none";    
+  }
+
+  processdelete(jobid:any){
+    //alert(jobid); 
+    this.admnemployer.deleteJob(jobid).subscribe((jobdata:any)=>{
+    if(jobdata==""){
+    this.emptyJoblist = "No Jobs found posted";
+    }
+    this.jobslist=JSON.parse(JSON.stringify(jobdata));                  
+    }) 
+    this.jobdelStyle = "none";  
+    this.route.navigate(['admin/joblist']);  
+  } 
 
 }

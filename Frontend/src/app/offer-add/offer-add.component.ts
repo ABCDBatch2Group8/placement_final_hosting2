@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { OfferModel } from '../offer.model';
 import { OfferService } from '../offer.service';
 import { NgForm } from '@angular/forms';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { HeaderService } from '../header.service';
 
 @Component({
   selector: 'app-offer-add',
@@ -14,9 +15,10 @@ export class OfferAddComponent implements OnInit {
   title: String = "Please Register!";
   addOffer = new OfferModel('','','','','','','','','');
 
-  constructor(private offerService: OfferService, private router: Router) { }
+  constructor(private headservice : HeaderService,private offerService: OfferService, private router: Router) { }
 
   ngOnInit(): void {
+    this.headservice.setMenu("employer");
   }
   AddOffer(){
   this.offerService.newOffer(this.addOffer);

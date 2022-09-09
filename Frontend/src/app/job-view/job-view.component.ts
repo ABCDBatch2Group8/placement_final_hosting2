@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JobModel } from '../job.model';
 import { JobService } from '../job.service';
+import { HeaderService } from '../header.service';
 
 @Component({
   selector: 'app-job-view',
@@ -16,10 +17,12 @@ export class JobViewComponent implements OnInit {
   viewJob = new JobModel('','','','','','','',this.selItems,'',null!,null!);
   
  
-  constructor(private jobService: JobService,  private router: Router) { }
+  constructor(private headservice : HeaderService,private jobService: JobService,  private router: Router) { }
 
   ngOnInit(): void {
+    this.headservice.setMenu("employer");
     let jobId = localStorage.getItem("JobId");
+    console.log("jobid in view is",jobId)
     this.jobService.jobDetails(jobId).subscribe((data:any)=>{
       this.viewJob = JSON.parse(JSON.stringify(data));
             

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudAuthService } from '../stud-auth.service';
+import { HeaderService } from '../header.service';
 
 @Component({
   selector: 'app-stud-jobhistory',
@@ -8,6 +9,7 @@ import { StudAuthService } from '../stud-auth.service';
 })
 export class StudJobhistoryComponent implements OnInit {
 
+  
   jobs =[ {
     _id:'',
     // name:"",
@@ -18,16 +20,27 @@ export class StudJobhistoryComponent implements OnInit {
     location:"",
     start_date:'',
     end_date:'',
-    experience:''
+    experience:'',
+    applicants:[{
+      
+    stud_ref:'',
+      shortlist_status:false,
+      application_status:''
+    }]
   }]
+  stu = localStorage.getItem("stud-id")
+  
 
-  constructor(private history:StudAuthService) { }
+  constructor(private history:StudAuthService, private headservice : HeaderService) { }
 
   ngOnInit(): void {
+    this.headservice.setMenu("student");
     let id = localStorage.getItem("stud-id")
     this.history.job_history(id).subscribe((data)=>{
       this.jobs=JSON.parse(JSON.stringify(data))
+      let x = JSON.parse(JSON.stringify(data));
         console.log("in stud-jobhistory component :",data)
+      
         
     })
   }

@@ -1,6 +1,23 @@
-<app-emp-dashboard></app-emp-dashboard>
+<main>
+
+    <!-- Hero Area Start-->
+    <div class="slider-area ">
+        <div class="single-slider section-overly d-flex align-items-center"  style="height:150px!important;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">                            
+                            <h4 style="color: white;">Profile</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="job-listing-area pt-30 pb-120">
 <div class="container">
     <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-10">
         <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && editProf()" novalidate>
             <div class="form-group">
                 <label>Company Name</label>
@@ -59,5 +76,8 @@
                 <button type="submit" class="btn btn-primary">Update Profile</button>
             </div>
         </form>
+        </div>
     </div>
 </div>
+</div>
+</main>

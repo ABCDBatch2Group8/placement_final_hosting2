@@ -1,0 +1,150 @@
+<main>
+
+    <!-- Hero Area Start-->
+    <div class="slider-area ">
+        <div class="single-slider section-overly d-flex align-items-center"  style="height:150px!important;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">                            
+                            <h2>Applicants</h2>
+                            <h4 style="color: white;">Position : {{jobinfo.position}}</h4>
+                            <h5 style="color: white;">( Company : {{jobinfo.company}} )</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Area End -->
+    
+    <div class="job-listing-area pt-30 pb-120">
+        <div class="container">
+            <div class="row">
+                <!-- Left content -->
+                <div class="col-xl-3 col-lg-3 col-md-4">
+                    
+                       
+                    <app-admn-menu></app-admn-menu>                      
+                    
+                   
+                </div>
+                <!-- Right content -->
+                <div class="col-xl-9 col-lg-9 col-md-8">
+                    
+                    <section class="featured-job-area">
+                        <div class="container" style="margin-top:40px; overflow-x:auto;">
+
+                            <div class="emptybox">{{errorApplnlist}}</div> 
+
+
+                            <table *ngIf="candidates?.length > 0" class="table table-striped table-bordered table-sm" style="font-size:14px;">
+                                <thead>
+                                    <tr>
+                                        <th class="th-sm" style="width: 20px;">S.No</th>                     
+                                        <th class="th-sm">Applicant</th>                     
+                                        <th class="th-sm">DWMS ID</th>
+                                        <th class="th-sm">Course Attended</th>                                        
+                                        <th class="th-sm" style="width: 50px;">View</th>
+                                        <th class="th-sm" style="width: 50px;">Shortlist</th>
+                                    </tr>
+                                </thead>
+                         
+                                <tbody>
+                                    <tr *ngFor="let applicant of candidates; let i = index">
+                                        <td>{{ i+1 }}</td>
+                                        
+                                        <td>{{ applicant.name }}</td>
+                         
+                                        <td>{{ applicant.dwmsid }}</td>
+                         
+                                        <td>{{ applicant.courseInICT}}</td>
+    
+    
+                                        <td><a  (click)="previewApplicant(applicant._id)" class="genric-btn primary circle fnbtn"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+    
+                                        <td>
+                                            <a  *ngIf="applicant.shortliststatus==='listed'"  class="genric-btn primary btgreen circle fnbtn"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                            <a  *ngIf="applicant.shortliststatus!=='listed'"  class="genric-btn danger circle fnbtn"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                        </td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                         <!--Student Preview starts-->
+                         <div class="modal previewbox" tabindex="-1" role="dialog" [ngStyle]="{'display':previewStyle}">
+                            <div class="modal-dialog" style="max-width: 650px;" role="document">                                    
+                              <div class="modal-content prvwbox">
+                                
+                                <div class="modal-body">
+                                  <p style="text-align:center; font-size: 24px;">{{studname}} </p>
+                                  <table class="table table-striped table-bordered table-sm"> 
+                                    <tr>
+                                        <td style="width: 30%;">Course Done</td><td>{{studcourse}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td><td>{{studemail}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DWMS Id</td><td>{{studdwms}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contact Phone</td><td>{{studphone}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Qualification</td><td>{{studqual}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Stream</td><td>{{studstream}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Location</td><td>{{studlocation}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Career Break (If Any)</td><td>{{studcbreak}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year of Passout</td><td>{{studpassout}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ready to Relocate</td><td>{{studrelocate}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><strong>Skills:</strong><br>
+                                            <span *ngFor="let skill of studskills;">
+                                                {{skill.item_text}}, 
+                                            </span>
+                                        </td>
+                                    </tr>
+                                                                        
+                                    
+                                  </table>                                          
+                                  <p style="text-align:center;">
+                                      <button type="button" class="btn btn-danger" (click)="closePreview()" style="padding:13px 20px; margin-top:20px;">
+                                          Close
+                                        </button>
+                                    </p>
+                                  
+                                </div>      
+                              </div>
+                            </div>
+                          </div>
+                        <!--Student Preview ends-->
+                         
+
+
+
+                          
+
+                        </div>
+
+                    </section>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</main>
