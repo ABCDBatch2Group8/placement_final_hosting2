@@ -1,0 +1,242 @@
+<main>
+
+    <div class="slider-area ">
+      <div class="single-slider section-overly d-flex align-items-center"  style="height:150px!important;">
+          <div class="container">
+              <div class="row">
+                  <div class="col-xl-12">
+                      <div class="hero-cap text-center">
+                          <h2>ICTAK Students</h2>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    
+    <div class="job-listing-area pt-30 pb-120">
+      <div class="container">
+          <div class="row">
+              <!-- Left content -->
+              <div class="col-xl-3 col-lg-3 col-md-4">
+                  
+                     
+                  <app-admn-menu></app-admn-menu>                      
+                  
+                 
+              </div>
+
+ <!-- Right content -->
+
+              <div class="col-xl-9 col-lg-9 col-md-8">
+                    
+                <section class="featured-job-area">
+                    <div class="container" style="margin-top:40px; overflow-x:auto;">
+                        <ul class="nav nav-tabs tbheads">
+                            <li class="active" ><a data-toggle="tab" href="#home">Info</a></li>
+                            <li><a data-toggle="tab" href="#menu1">Add Offer</a></li>
+                            <li><a data-toggle="tab" href="#menu2">Offers</a></li>                                 
+                        </ul>
+                        
+                          <div class="tab-content prflbox">
+                            <div id="home" class="tab-pane in active">
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-6">
+                                        <h5>{{studentView.name}}</h5><br>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <strong>Credentials</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                              <td> <p>Course in ICTAK</p></td>
+                                              <td>{{studentView.courseInICT}}</td>
+                                              
+                                            </tr>
+                                            <tr>
+                                              <td> <p>Highest qualification</p> </td>
+                                              <td>{{studentView.qualification}}</td>
+                                              
+                                            </tr>
+                                            <tr>
+                                              <td><p>Stream</p></td>
+                                              <td>{{studentView.stream}}</td>
+                                              
+                                            </tr>
+                                            <tr>
+                                              <td><p>Course status</p></td>
+                                              <td>{{studentView.courseStatus}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><p>Year of passout</p></td>
+                                                <td>{{studentView.YearOfPassout}}</td>
+                                              </tr>
+                                              <tr>
+                                                <td><p>Course status</p></td>
+                                                <td>{{studentView.courseStatus}}</td>
+                                              </tr>
+                                              <!-- <tr>
+                                                <td><p>Course status</p></td>
+                                                <td>{{studentView.courseStatus}}</td>
+                                              </tr> -->
+                                          </table>
+                                    </div>
+                                    <div class="col-xl-1 col-lg-1 col-md-1">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-xl-5 col-lg-5 col-md-5">
+                                        <br><br><br>
+                                        <table>
+                                            <tr>
+                                                <td><p>DWMS ID</p></td>
+                                                <td>{{studentView.dwmsid}}</td>
+                                               
+                                              </tr>
+                                              <tr>
+                                                <td><p>Location</p></td>
+                                                <td>{{studentView.location}}</td>
+                                                
+                                              </tr>
+                                              <tr>
+                                                <td><p>Ready to rellocate</p></td>
+                                                <td>{{studentView.readyToRelocate}}</td>
+                                                
+                                              </tr>
+                                              <br>
+                                            <tr>
+                                                <td>
+                                                    <strong>Contact Info</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                              <td><p><i class="fas fa-phone"></i>&nbsp; Phone</p></td>
+                                              <td>{{studentView.contactNo}}</td>
+                                              
+                                            </tr>
+                                            <tr>
+                                              <td><p><i class="fas fa-envelope" style="margin-left:5px;"></i>&nbsp;Email</p></td>
+                                              <td>{{studentView.dwmsid}}</td>
+                                              
+                                            </tr>
+                                              <!-- <tr>
+                                                <td><p></p></td>
+                                                <td>Brown</td>
+                                                
+                                              </tr> -->
+                                          </table>
+                                    </div>
+                                </div>
+                                
+                               
+                            </div>
+
+                            <div id="menu1" class="tab-pane fade">
+                              <h4>Offer Details</h4>
+                              
+                              <form class="form" #offerForm="ngForm" (ngSubmit)="offerForm.form.valid && AddOffer()">
+                                <div class="form-group mt-10">
+                                  <label for="">Company name</label>
+                                  <!-- <div class="input-group-icon mt-10"> -->
+                                    
+                                    <div class="form-select" id="default-select" name="company"  required>
+                                          <select class="form-control" id="company" name="company" 
+                                          #company="ngModel"
+                                          [(ngModel)]="offer.company"
+                                          [ngClass]="{ 'is-invalid': offerForm.submitted && company.errors }">
+                                            <option class="text-danger">Select a Company</option>
+                                            <option *ngFor="let comps of emp">
+                                              {{comps.title}}
+                                            </option>
+                                      </select>
+                                      <small class="errdisplay" style="font-size:14px;">{{selectmessage}}</small>
+                                    </div>
+                                  </div>
+                                  
+                                  <!-- <input type="text" name="first_name" placeholder="First Name"
+                                    onfocus="this.placeholder = ''" onBlur="this.placeholder = 'First Name'" required
+                                    class="single-input"> -->
+                                <!-- </div> -->
+                                <div class=" form-group mt-10">
+                                  <label for="">Designation</label>
+                                  <input type="text"
+                                  onFocus="this.placeholder = ''" 
+                                  onBlur="this.placeholder = 'Enter designation'" 
+                                  placeholder="Enter designation" 
+                                  id="designation" name="designation"
+                                      required class="form-control single-input"
+                                      #designation="ngModel"
+                                      [(ngModel)]="offer.designation" 
+                                      [ngClass]="{ 'is-invalid': offerForm.submitted && designation.errors }">
+                                      <div *ngIf="offerForm.submitted && designation.errors" class="errdisplay">
+                                        <div *ngIf="designation.errors['required']">Designation is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-10">
+                                  <label for="">Offer date</label>
+                                  <input type="text" required
+                                  onFocus="this.placeholder = ''" 
+                                  onBlur="this.placeholder = 'Enter name of the company'" 
+                                  placeholder="Enter name of the company"
+                                   id="offer_date" name="offer_date" 
+                                   class="form-control single-input"
+                                     #offer_date="ngModel"
+                                     [(ngModel)]="offer.offer_date" 
+                                     [ngClass]="{ 'is-invalid': offerForm.submitted && offer_date.errors }">
+                                      <div *ngIf="offerForm.submitted && offer_date.errors" class="errdisplay">
+                                        <div *ngIf="offer_date.errors['required']">Designation is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-10">
+                                  <label for="">cc_per_annum</label>
+                                  <input type="text"
+                                  onFocus="this.placeholder = ''" 
+                                  onBlur="this.placeholder = 'Enter cc_per_annum'" 
+                                  placeholder="Enter cc_per_annum"
+                                   id="ctc_per_annum" name="ctc_per_annum" 
+                                      #ctc_per_annum="ngModel"
+                                      required class="form-control single-input" 
+                                      [(ngModel)]="offer.ctc_per_annum"
+                                      [ngClass]="{ 'is-invalid': offerForm.submitted && ctc_per_annum.errors }">
+                                      <div *ngIf="offerForm.submitted && ctc_per_annum.errors" class="errdisplay">
+                                        <div *ngIf="ctc_per_annum.errors['required']">cc_per_annum is required</div>
+                                    </div>
+                                </div><br>
+                                <div class="row">
+                                  <div class="col-sm-6">
+                                      <button type="reset" class="btn btn-warning"> Reset </button>
+                                  </div>
+                                  <div class="col-sm-6">                                                                                    
+                                      <button type="submit" class="btn btn-primary float-right">Add Offer</button><br>
+                                      <small class="errdisplay" style="font-size:14px;">{{servermessage}}</small>
+                                  </div>
+                              </div>
+                              </form>
+                             </div> 
+                            
+                  <div id="menu2" class="tab-pane fade">
+                    <h3>Job offers....</h3>
+                    <p>Job list here..</p>
+                    <table>
+                      <tr *ngFor="let offer of offerView">
+                          
+                          {{offer.company}} <br> 
+                          {{offer.designation}} <br>
+                        {{offer.offer_date}} <br>
+                      {{offer.cc_per_annum}
+                    
+                        </tr>
+                    </table>
+
+                  </div>
+
+              </div>
+           </div>
+        </section>
+                
+      </div>       
+    </div>
+  </div>
+ </div>
+</main>
+

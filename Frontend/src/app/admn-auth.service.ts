@@ -18,11 +18,11 @@ export class AdmnAuthService {
     return this.http.post('http://localhost:3000/admin/login',admin)
   }
   newAdmin(admin:any){
-    alert(admin)
+    
     return this.http.post('http://localhost:3000/admin/signup',admin)
-    .subscribe(data=>{
-      console.log(data);
-    })
+    // .subscribe(data=>{
+    //   console.log(data);
+    // })
   }
   editAdmin(id:any,password:any){
     
@@ -36,7 +36,7 @@ export class AdmnAuthService {
     .subscribe(data =>{console.log(data)})
   }
   newStudent(stud:any){
-    alert('yes')
+    
     return this.http.post('http://localhost:3000/admin/addictkstudent',stud)
     .subscribe(data=>{
       
@@ -47,6 +47,9 @@ export class AdmnAuthService {
     .subscribe(data=>{
       console.log(data);
     })
+  }
+  courseList(){
+   return this.http.get('http://localhost:3000/admin/showcourse')
   }
   getStudent(email:any){
     return this.http.get('http://localhost:3000/admin/student',email)
@@ -60,7 +63,39 @@ export class AdmnAuthService {
     return this.http.delete("http://localhost:3000/admin/deletecourse/"+id)
   }
   deleteStudent(id:any){
-    
     return this.http.delete("http://localhost:3000/admin/deletestudent/"+id)
   }
+  countStudent(email:any){
+    alert(email)
+    return this.http.get("http://localhost:3000/admin/emailcount/"+email)
+    .subscribe(result=>{
+      alert(result)
+    })
+  }
+  countAdmin(email:any){
+    return this.http.get("http://localhost:3000/admin/admincount"+email)
+  }
+  getCandidate(id:any){
+    return this.http.get("http://localhost:3000/admin/getcandidate/"+id)
+  }
+
+
+  newOffer(addoffer: any) {
+   
+    return this.http.post('http://localhost:3000/admin/offer',  addoffer)
+          
+}
+getEmployers(){
+  return this.http.get('http://localhost:3000/admin/employerlist')
+}
+getoffers(id:any){
+  return this.http.get('http://localhost:3000/admin/getoffers'+id)
+}
+logedIN(){
+  return !!localStorage.getItem('token')
+}
+gettoken()
+{
+  return localStorage.getItem('token');
+}
 }

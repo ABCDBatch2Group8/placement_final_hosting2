@@ -26,11 +26,18 @@ export class AdmnCandidatesComponent implements OnInit {
     .subscribe(posts => {
         //this.candidates = posts;
         this.candidates = JSON.parse(JSON.stringify(posts));
+        
     }, error => console.error(error));
   } 
     
 
   ngOnInit(): void {
+  }
+  viewStudent(stud:any){
+   
+    localStorage.setItem('candidateID',stud._id.toString());
+    alert('okkkk')
+    this.route.navigate(['admin/studentprofile']);
   }
 
 }

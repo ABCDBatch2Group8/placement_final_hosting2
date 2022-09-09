@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AdmnAuthService } from '../admn-auth.service';
-
+import { HeaderService } from '../header.service';
 export class Courses{
   constructor(
     public course:string,
@@ -17,9 +17,11 @@ export class Courses{
 })
 
 export class AdmnCourseComponent implements OnInit {
+
 displayStyle = "none";
 showform="none";
 courses:Courses[]=[];
+list:any;
 ref:any;
 
 Course={
@@ -31,18 +33,23 @@ course!:string
 caegory!:string
   constructor(private http:HttpClient,
     private router:Router,
-    private admn:AdmnAuthService) { }
+    private admn:AdmnAuthService,
+    private headservice : HeaderService
+    ) { }
 
   ngOnInit(): void {
-    this.getCourses()
+    this.headservice.setMenu("general");
+    this.getCourses();
   }
 getCourses(){
-this.http.get<any>("http://localhost:3000/admin/showcourse").subscribe(
-  response=>{
-    this.courses=response;
-    console.log(response)
-  }
-)
+  this.http.get<any>("http://localhost:3000/admin/showcourse")
+  .subscribe(data=>{
+    this.courses=JSON.parse(JSON.stringify(data)) ;
+  })
+  // this.admn.courseList().subscribe(respose=>{
+  //   this.course=JSON.stringify( JSON.stringify(respose));
+  //   alert( this.course)
+  // })
 }
 newCourse(){
 
@@ -52,6 +59,10 @@ newCourse(){
     
   }
   this.admn.newCourse(newcourse);
+  this.router.navigate(['admin/courses'])
+  .then(() => {
+    window.location.reload();
+  });
   this.showform="none";
 }
 getId(crs:any){
@@ -65,8 +76,13 @@ toDelete(courseid:any){
   
   this.admn.deleteCourse(courseid).subscribe((data)=>{
     this.course=JSON.parse(JSON.stringify(data))
-    this.displayStyle = "none"; 
-    // this.courses=this.courses.filter(p=>p!=course);
+    this.displayStyle = "none";
+     this.router.navigate(['admin/courses'])
+    .then(() => {
+      window.location.reload();
+    });
+
+    //this.courses=this.courses.filter(p=>p!=course);
     // this.router.navigate(['admin/dashboard'])
   })
   }
@@ -74,4 +90,5 @@ toDelete(courseid:any){
   {
     this.showform="block";
   }
+  
 }

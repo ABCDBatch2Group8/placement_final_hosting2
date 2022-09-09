@@ -1,6 +1,7 @@
 const express=require('express');
 const mongoose=require('mongoose');
 const router=express.Router();
+const jwt=require('jsonwebtoken');
 
 
 const adminModel=require('../models/subadmin');
@@ -9,11 +10,10 @@ const courseModel=require('../models/course');
 const employerModel=require('../models/employer');
 const candidateModel=require('../models/candidates');
 const jobsModels=require('../models/job');
+const offerModel=require('../models/admn_offer');
 
 
-router.get('/',(req,res)=>{
-    res.send('Admin');
-})
+
 
 //ADMIN LOGIN
 
@@ -30,18 +30,21 @@ router.post('/login',async(req,res)=>{
         console.log(admindata.password)
         if(admindata.password===password && admindata.status==='Enable')
         {
-            
-            // let payload = {subject:email+password}
-            // let token=jwt.sign(payload,'secretkey')
-            // res.status(200).send({token});
             console.log('validated');
-            res.json({"success":"true","msg":"validated"})
+            let payload = {subject:email+password}
+            let token=jwt.sign(payload,'secretkey')
+            // res.status(200).send({token});
+            
+            res.json({message:"Login successful",
+                      status:"success",
+                    tok:token})
         }
         else
         {
            // res.send('password not matching');
             console.log('pwd not matching')
-            res.json({"success":"false","msg":"password not matching"})
+            res.json({message:"Password not matching",
+                status:"fail"})
         }
     }
     catch(error)
@@ -58,17 +61,27 @@ router.post('/login',async(req,res)=>{
 router.post('/signup',(req,res)=>{
     console.log("email :",req.body.email)
     console.log(req.body.email)
-   const newAdmin={
-    email:req.body.email,
-    password:req.body.password
-   }
-   var subadmin=new adminModel(newAdmin);
-   subadmin.save();
+    adminModel.findOne({'email':req.body.email},function(err,user){
+        if(user){
+            var error = "email";
+            var message = "Email already exists";
+            res.json({msg:"Email already exists"});
+        }
+        else{
+            const newAdmin={
+                email:req.body.email,
+                password:req.body.password
+               }
+               var subadmin=new adminModel(newAdmin);
+               subadmin.save();
+        }
+    })
+   
    })
    //LIST SUBADMINS
 
  router.get('/admins',(req,res)=>{
-    adminModel.find().then(function(admins){
+    adminModel.find({designation:{$ne:'Super Admin'}}).then(function(admins){
         res.send(admins);
     });
 
@@ -115,11 +128,20 @@ router.post('/signup',(req,res)=>{
             lastname:req.body.lastname,
             email:req.body.email
            }
-           console.log(newstud)
-           var student=new ictkStudModel(newstud);
-           student.save();
-
+           ictkStudModel.findOne({'email':newstud.email}, function(err,val){
+            if(err){
+              console.log(err);
+            }
+             if(val === null){
+                console.log(newstud)
+                var student=new ictkStudModel(newstud);
+                student.save();
+            }
+            else{
+                console.log("data found in admin db")  
+           }
       })
+    })
 	  
 	 //GET STUDENT
 
@@ -152,6 +174,27 @@ router.post('/signup',(req,res)=>{
                 res.send();
             })
           })
+
+//COUNT EMAIL OF STUDENTS
+router.get('/emailcount/:email',(req,res)=>{
+        let email=req.params.email;
+        console.log(email)
+        ictkStudModel.find({"email" : email}).count().then(function(studcount){
+           console.log(studcount);
+           res.json(studcount);
+        });
+    });
+
+
+    //COUNT EMAIL OF ADMIN
+router.get('/admincount/:email',(req,res)=>{
+    let email=req.params.email;
+    console.log(email)
+    adminModel.find({"email" : email}).count().then(function(admncount){
+       console.log(admncount);
+       res.json(admncount);
+    });
+});
             
 // CREATE ICTK COURSE LIST
 router.post('/course',(req,res)=>{
@@ -162,7 +205,7 @@ router.post('/course',(req,res)=>{
     }
     var Course=new courseModel(newCourse);
     Course.save();
-});
+})
 
 //SHOW COURSES
 
@@ -182,6 +225,49 @@ router.delete('/deletecourse/:id',(req,res)=>{
         console.log('success')
         res.send();
         })
+
+})
+
+//SEND OFFER TO CADIDATE
+router.post('/offer',(req,res)=>{
+    console.log("req.body",req.body);
+        const placement = {
+          candidateid: req.body.candidateid,
+          company: req.body.company,
+          designation: req.body.designation,
+          offer_date: req.body.offer_date,
+          ctc_per_annum: req.body.ctc_per_annum
+        }
+        var offer=new offerModel(placement);
+        offer.save()
+        .then(data => {
+            res.json({"message":"Successfully registered", "status":"success"});
+            console.log("success")
+        })
+        .catch(err => {
+            res.json({"message":err,"status":"error"});
+            console.log("error",err)
+        })   
+      });
+
+      router.get('/getoffers/:id',(req,res)=>{
+        id=req.params.id;
+        offerModel.findById({'_id':id})
+        .then((joboffers)=>{
+            res.send(joboffers)
+        })
+      })
+
+//Biju
+
+
+//CANDIDATE VIEW
+router.get('/getcandidate/:id',(req,res)=>{
+    id=req.params.id;
+    candidateModel.findById({'_id':id})
+    .then((studview)=>{
+        res.send(studview);
+    })
 
 })
 

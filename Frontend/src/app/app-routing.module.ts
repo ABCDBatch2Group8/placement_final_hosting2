@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes} from  '@angular/router';
+import { AdmnAuthGuard } from './admn-auth.guard';
 
 // import {  } from "@angular/";
 import { AdminComponent } from './admin/admin.component';
@@ -39,6 +40,8 @@ import { JobViewComponent } from './job-view/job-view.component';
 import { JobUpdateComponent } from './job-update/job-update.component';
 import { JobShortlistComponent } from './job-shortlist/job-shortlist.component';
 import { OfferAddComponent } from './offer-add/offer-add.component';
+import { AdmnStudprofileComponent } from './admn-studprofile/admn-studprofile.component';
+import { AdmnChildGuard } from './admn-child.guard';
 
 
 
@@ -76,7 +79,8 @@ const routes: Routes = [
   
   ]
   },
-  {path : "admin", component : AdminComponent,
+  {path : "admin", component : AdminComponent,canActivate:[AdmnAuthGuard],
+  canActivateChild:[AdmnChildGuard],
   children : [
     {path : "", component : AdmnLoginComponent},
     {path : "dashboard", component : AdmnDashboardComponent},
@@ -89,7 +93,8 @@ const routes: Routes = [
     {path:  "reset", component : AdmnResetComponent},
     {path:  "adminlist",component : AdmnListComponent},
     {path : "addemployer", component : AdmnAddemployerComponent},
-    {path : "joblist", component : AdmnJobsComponent}
+    {path : "joblist", component : AdmnJobsComponent},
+    {path:"studentprofile",component:AdmnStudprofileComponent}
   ]
   }
 ];

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AdmnAuthService } from '../admn-auth.service';
 import { Router } from '@angular/router';
+import { HeaderService } from '../header.service';
 import Swal from 'sweetalert2'
 @Component({
   selector: 'app-admn-reset',
@@ -19,10 +20,12 @@ export class AdmnResetComponent implements OnInit {
   constructor(
     private admn:AdmnAuthService,
     private router:Router,
-    private http:HttpClient
+    private http:HttpClient,
+    private headservice : HeaderService
   ) { }
 
   ngOnInit(): void {
+    this.headservice.setMenu("general");
      this.admnID=localStorage.getItem("editPwd")
   }
   resetAdmin(){

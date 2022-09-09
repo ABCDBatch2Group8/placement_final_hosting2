@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AdmnAuthService } from '../admn-auth.service';
 import { Router } from '@angular/router';
+import { HeaderService } from '../header.service';
 
 @Component({
   selector: 'app-admn-subadmn',
@@ -16,12 +17,16 @@ export class AdmnSubadmnComponent implements OnInit {
     email:'',
     password:''
   }
-  constructor(private admn:AdmnAuthService,private router:Router) { }
+  constructor(
+    private admn:AdmnAuthService,
+    private router:Router,
+    private headservice : HeaderService) { }
 
   ngOnInit(): void {
+    this.headservice.setMenu("general");
   }
   subAdmin(){
-    alert(this.admin.email)
+    
     const newadmin={
       email:this.admin.email,
       password:this.admin.password

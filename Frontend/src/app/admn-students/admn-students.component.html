@@ -35,7 +35,8 @@
 
                     <table class="table table-striped table-bordered table-sm" style="font-size:14px;">
                       <thead>
-                          <tr>                                                
+                          <tr> 
+                            <th class="th-sm" style="width: 20px;">Sl.No</th>                                                                   
                               <th class="th-sm">Name</th>                                                   
                               <th class="th-sm">Email</th>                              
                               <th class="th-sm" style="width: 60px;">Remove</th>
@@ -43,10 +44,12 @@
                       </thead>
                
                       <tbody>
-                        <tr *ngFor="let i of students">                          
+                        <tr *ngFor="let i of students;let j=index">  
+                          <td>{{j+1}}</td>                        
                           <td>{{i.firstname}}&nbsp;{{i.lastname}}</td>
                           <td>{{i.email}}</td>
-                          <td><a  class="genric-btn danger circle fnbtn" (click)="toDelete(i)">Delete</a></td>
+                          <td><a  class="genric-btn danger circle fnbtn"(click)="getId(i)" >Delete</a></td>
+                          <!-- <td><a  class="genric-btn danger circle fnbtn" (click)="toDelete(i)">Delete</a></td> -->
                         </tr>
                           
                       </tbody>
@@ -72,14 +75,34 @@
   
         <!-- Modal body -->
         <div class="modal-body">
-          <form action="" #submit="ngForm" (ngSubmit)="newStudent()">
+          <form  #submit="ngForm" (ngSubmit)="submit.form.valid && newStudent()">
             <div class="form-group">
                 <label for="">Firstname</label>
-                <input type="firstname" name="firstname" class="form-control"[(ngModel)]="student.firstname"  required>
+                <input 
+                type="firstname" 
+                name="firstname" 
+                class="form-control"
+                [(ngModel)]="student.firstname" 
+                #firstname="ngModel" 
+                [ngClass]="{ 'is-invalid': submit.submitted && firstname.errors }"
+                required/>
+                <div *ngIf="submit.submitted && firstname.errors" class="errdisplay">
+                  <div *ngIf="firstname.errors['required']"class="text-danger">Firstname is required</div>
+              </div>
             </div>
             <div class="form-group">
                 <label for="">Lastname</label>
-                <input type="lastname" name="lastname" class="form-control"[(ngModel)]="student.lastname"  required>
+                <input 
+                type="lastname" 
+                name="lastname" 
+                class="form-control"
+                [(ngModel)]="student.lastname"
+                #lastname="ngModel" 
+                [ngClass]="{ 'is-invalid': submit.submitted && lastname.errors }"
+                required/>
+                <div *ngIf="submit.submitted && lastname.errors" class="errdisplay">
+                  <div *ngIf="lastname.errors['required']"class="text-danger">Lastname is required</div>
+              </div>
             </div>
             <div class="form-group">
             <label for="">Email</label>
@@ -90,17 +113,42 @@
             class="form-control"
             [(ngModel)]="student.email" 
            #email="ngModel" 
-           [class.is-invalid]="email.invalid && email.touched" 
-           pattern="^[a-z0-9.%+]+@[a-z0-9.-]+\.[a-z]{2,4}"><br>
-            <small class="text-danger" [class.d-none]="email.valid||email.touched">Enter valid email</small>
+           pattern="^[a-z0-9.%+]+@[a-z0-9.-]+\.[a-z]{2,4}"
+           [ngClass]="{ 'is-invalid': submit.submitted && email.errors }"/>
+            <div *ngIf="submit.submitted && email.errors" class="errdisplay">
+              <div *ngIf="email.errors['required']" class="text-danger">Email is required</div>
+              <div *ngIf="email.errors['email']"class="text-danger">Email is invalid</div>
+              <div *ngIf="email.errors['pattern']"class="text-danger">Invalid email pattern</div>
+          </div>                                    
         </div>
         
         <br>
-        <button class="btn btn-primary" [disabled]="submit.form.invalid" >submit</button>
+        <button class="btn btn-primary"  >submit</button>
         </form>
         </div>
       </div>
     </div>
     </div>
   
+
+    <!-- The Modal --> 
+    <div class="modal centeredbox" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          
+          <div class="modal-body alrtbox">
+            <p style="text-align:center;">Are you sure to delete this course? 
+                <br>
+                <button type="button" class="btn btn-danger" (click)="toDelete()" style="padding:20px 30px; margin-top:20px;">
+                  Yes
+                </button>&nbsp;
+                <button type="button" class="btn btn-danger" (click)="closePopup()" style="padding:20px 30px; margin-top:20px;">
+                    Cancel
+                  </button>
+            </p>  
+          </div>      
+        </div>
+      </div>
+    </div>
+
   </main>     
