@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 export class Offers{
   constructor(
       public company: String,
+      public jobid:string,
       public designation: String,
       public offer_date: String,
       public ctc_per_annum: String
@@ -19,7 +20,25 @@ export class Offers{
   styleUrls: ['./admn-studprofile.component.css']
 })
 export class AdmnStudprofileComponent implements OnInit {
-
+  jobs =[ {
+    _id:'',
+    // name:"",
+    company:"",
+    position:"",
+    jd_text:"",
+    numbers:'',
+    salary: "",
+    location:"",
+    start_date:'',
+    end_date:'',
+    experience:'',
+    applicants:[{
+      
+    stud_ref:'',
+      shortlist_status:false,
+      application_status:''
+    }]
+  }]
   servermessage="";
   selectmessage="";
 
@@ -31,11 +50,13 @@ export class AdmnStudprofileComponent implements OnInit {
 
   offer={
     company:'',
+    jobid:'',
      designation:'',
      offer_date:'',
      ctc_per_annum:''
   }
      company!: String
+     jobid!:String
      designation!: String
      offer_date!: String
      ctc_per_annum!: String
@@ -58,8 +79,11 @@ export class AdmnStudprofileComponent implements OnInit {
       this.admn.getEmployers().subscribe(data=>{
         this.emp=JSON.parse(JSON.stringify(data))
 
-        this.admn.getoffers(studid).subscribe((values)=>{
-          this.offerView=JSON.parse(JSON.stringify(values))
+        this.admn.getoffers(studid).subscribe((data)=>{
+          this.jobs=JSON.parse(JSON.stringify(data))
+
+        // this.admn.getoffers(studid).subscribe((values)=>{
+        //   this.offerView=JSON.parse(JSON.stringify(values))
         })
       })
     })
@@ -67,7 +91,11 @@ export class AdmnStudprofileComponent implements OnInit {
   
   AddOffer(){
    const submitedoffer={
-      candidateid:this.studentView._id,
+      dwmsid:this.studentView.dwmsid,
+      email:this.studentView.email,
+      batch:this.studentView.courseInICTAK,
+      name:this.studentView.name,
+      jobid:this.offer.jobid,
       company:this.offer.company,
       designation:this.offer.designation,
       offer_date:this.offer.offer_date,
@@ -75,12 +103,12 @@ export class AdmnStudprofileComponent implements OnInit {
     }
     if(submitedoffer.company=='Select a Company'){
 
-alert('enter')
+
       this.selectmessage="Please select title of company"
     }
     else{
       alert(submitedoffer.company)
-      alert('success')
+      
       this.admn.newOffer(submitedoffer).subscribe(res=>{
         let data=JSON.parse(JSON.stringify(res));
         if(JSON.parse(JSON.stringify(data.status)) ==="succes")

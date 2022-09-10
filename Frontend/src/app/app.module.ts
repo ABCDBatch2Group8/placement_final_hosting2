@@ -45,7 +45,9 @@ import { StudHomeComponent } from './stud-home/stud-home.component';
 import { StudJobhistoryComponent } from './stud-jobhistory/stud-jobhistory.component';
 import { AdmnAddemployerComponent } from './admn-addemployer/admn-addemployer.component';
 import { AdmnJobsComponent } from './admn-jobs/admn-jobs.component';
-
+import { AdmnJobapplicationsComponent } from './admn-jobapplications/admn-jobapplications.component';
+import { LogoutComponent } from './logout/logout.component';
+import { JobApplnStatusComponent } from './job-appln-status/job-appln-status.component';
 
 import { SkillService } from './skill.service';
 import { JobListComponent } from './job-list/job-list.component';
@@ -55,6 +57,7 @@ import { JobViewComponent } from './job-view/job-view.component';
 import { OfferAddComponent } from './offer-add/offer-add.component';
 import { OfferService } from './offer.service';
 import { AdmnStudprofileComponent } from './admn-studprofile/admn-studprofile.component';
+
 
 @NgModule({
   declarations: [
@@ -99,13 +102,11 @@ import { AdmnStudprofileComponent } from './admn-studprofile/admn-studprofile.co
     JobShortlistComponent,
     JobViewComponent,
     OfferAddComponent,
-<<<<<<< HEAD
-    AdmnStudprofileComponent
-=======
+    AdmnStudprofileComponent,
     AdmnJobapplicationsComponent,
     JobApplnStatusComponent,
     LogoutComponent
->>>>>>> fa25254719a023a595c5162c1d5112596a2b4da4
+
   ],
   imports: [
     BrowserModule,
@@ -116,7 +117,13 @@ import { AdmnStudprofileComponent } from './admn-studprofile/admn-studprofile.co
     DataTablesModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [EmpService,JobService,StudAuthService,SkillService,OfferService],
+  providers: [
+    EmpService,
+    JobService,
+    StudAuthService,
+    SkillService,
+    OfferService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

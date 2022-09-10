@@ -35,7 +35,7 @@
                         <ul class="nav nav-tabs tbheads">
                             <li class="active" ><a data-toggle="tab" href="#home">Info</a></li>
                             <li><a data-toggle="tab" href="#menu1">Add Offer</a></li>
-                            <li><a data-toggle="tab" href="#menu2">Offers</a></li>                                 
+                                                             
                         </ul>
                         
                           <div class="tab-content prflbox">
@@ -152,7 +152,21 @@
                                       <small class="errdisplay" style="font-size:14px;">{{selectmessage}}</small>
                                     </div>
                                   </div>
-                                  
+                                  <div class=" form-group mt-10">
+                                    <label for="">Jb ID</label>
+                                    <input type="text"
+                                    onFocus="this.placeholder = ''" 
+                                    onBlur="this.placeholder = 'Enter designation'" 
+                                    placeholder="Enter JobID" 
+                                    id="jobid" name="jobid"
+                                        required class="form-control single-input"
+                                        #jobid="ngModel"
+                                        [(ngModel)]="offer.jobid" 
+                                        [ngClass]="{ 'is-invalid': offerForm.submitted && designation.errors }">
+                                        <div *ngIf="offerForm.submitted && designation.errors" class="errdisplay">
+                                          <div *ngIf="designation.errors['required']">JobID is required</div>
+                                      </div>
+                                  </div>
                                   <!-- <input type="text" name="first_name" placeholder="First Name"
                                     onfocus="this.placeholder = ''" onBlur="this.placeholder = 'First Name'" required
                                     class="single-input"> -->
@@ -214,21 +228,10 @@
                               </form>
                              </div> 
                             
-                  <div id="menu2" class="tab-pane fade">
-                    <h3>Job offers....</h3>
-                    <p>Job list here..</p>
-                    <table>
-                      <tr *ngFor="let offer of offerView">
-                          
-                          {{offer.company}} <br> 
-                          {{offer.designation}} <br>
-                        {{offer.offer_date}} <br>
-                      {{offer.cc_per_annum}
+                  <!-- <div id="menu2" class="tab-pane fade">
                     
-                        </tr>
-                    </table>
 
-                  </div>
+                  </div> -->
 
               </div>
            </div>

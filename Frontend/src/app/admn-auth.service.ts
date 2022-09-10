@@ -12,47 +12,48 @@ export class AdmnAuthService {
     lastname:'',
     email:''
   }
+  server_address: string = 'http://localhost:3000';
 
   constructor(private http:HttpClient) { }
   admnlogin(admin:any){
-    return this.http.post('http://localhost:3000/admin/login',admin)
+    return this.http.post(`${this.server_address}/admin/login`,admin)
   }
   newAdmin(admin:any){
     
-    return this.http.post('http://localhost:3000/admin/signup',admin)
+    return this.http.post(`${this.server_address}/admin/signup`,admin)
     // .subscribe(data=>{
     //   console.log(data);
     // })
   }
   editAdmin(id:any,password:any){
     
-    return this.http.put("http://localhost:3000/admin/reset/"+id,{password})
+    return this.http.put(`${this.server_address}/admin/reset/`+id,{password})
     .subscribe(data =>{console.log(data)})
   }
   statusAdmin(id:any,status:any)
   {
-    alert(status)
-    return this.http.put("http://localhost:3000/admin/status/"+id,{status})
+    
+    return this.http.put(`${this.server_address}/admin/status/`+id,{status})
     .subscribe(data =>{console.log(data)})
   }
   newStudent(stud:any){
     
-    return this.http.post('http://localhost:3000/admin/addictkstudent',stud)
+    return this.http.post(`${this.server_address}/admin/addictkstudent`,stud)
     .subscribe(data=>{
       
     })
   }
   newCourse(course:any){
-    return this.http.post('http://localhost:3000/admin/course',course)
+    return this.http.post(`${this.server_address}/admin/course`,course)
     .subscribe(data=>{
       console.log(data);
     })
   }
   courseList(){
-   return this.http.get('http://localhost:3000/admin/showcourse')
+   return this.http.get(`${this.server_address}/admin/showcourse`)
   }
   getStudent(email:any){
-    return this.http.get('http://localhost:3000/admin/student',email)
+    return this.http.get(`${this.server_address}/admin/student`,email)
     .subscribe(data=>{
       console.log(data);
     })
@@ -60,36 +61,36 @@ export class AdmnAuthService {
   }
   deleteCourse(id:any){
     
-    return this.http.delete("http://localhost:3000/admin/deletecourse/"+id)
+    return this.http.delete(`${this.server_address}/admin/deletecourse/`+id)
   }
   deleteStudent(id:any){
-    return this.http.delete("http://localhost:3000/admin/deletestudent/"+id)
+    return this.http.delete(`${this.server_address}/admin/deletestudent/`+id)
   }
   countStudent(email:any){
-    alert(email)
-    return this.http.get("http://localhost:3000/admin/emailcount/"+email)
+    
+    return this.http.get(`${this.server_address}/admin/emailcount/`+email)
     .subscribe(result=>{
-      alert(result)
+      
     })
   }
   countAdmin(email:any){
-    return this.http.get("http://localhost:3000/admin/admincount"+email)
+    return this.http.get(`${this.server_address}/admin/admincount`+email)
   }
   getCandidate(id:any){
-    return this.http.get("http://localhost:3000/admin/getcandidate/"+id)
+    return this.http.get(`${this.server_address}/admin/getcandidate/`+id)
   }
 
 
   newOffer(addoffer: any) {
    
-    return this.http.post('http://localhost:3000/admin/offer',  addoffer)
+    return this.http.post(`${this.server_address}/admin/offer`,  addoffer)
           
 }
 getEmployers(){
-  return this.http.get('http://localhost:3000/admin/employerlist')
+  return this.http.get(`${this.server_address}/admin/employerlist`)
 }
 getoffers(id:any){
-  return this.http.get('http://localhost:3000/admin/getoffers'+id)
+  return this.http.get(`${this.server_address}/admin/history/`+id)
 }
 logedIN(){
   return !!localStorage.getItem('token')

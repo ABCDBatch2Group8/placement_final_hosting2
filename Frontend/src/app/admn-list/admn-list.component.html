@@ -93,8 +93,7 @@
          [ngClass]="{ 'is-invalid': adminForm.submitted && email.errors }"
          placeholder="admin@gmail.com"
          onfocus="this.placeholder = ''" 
-         onBlur="this.placeholder = 'Email'"
-          >
+         onBlur="this.placeholder = 'Email'"/>
           <div *ngIf="adminForm.submitted && email.errors" class="invalid-feedback">
             <div *ngIf="email.errors['required']">Email is required</div>
             <div *ngIf="email.errors['email']">Email is invalid</div>
@@ -104,9 +103,6 @@
         
         <div class="form-group mt-10">
           <label for="">Password</label>
-          <div class="form-control">
-            
-          </div>
         <input 
         required
         type="password" 
@@ -119,8 +115,7 @@
         #password="ngModel"
         [ngClass]="{ 'is-invalid': adminForm.submitted && password.errors }"
         placeholder="eg : Admin12*"
-        onfocus="this.placeholder = ''" onBlur="this.placeholder = 'Password'" 
-        >
+        onfocus="this.placeholder = ''" onBlur="this.placeholder = 'Password'" />
         <!-- <span style="font-size: 10px">Must be of min length 8, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.</span> -->
         <div *ngIf="adminForm.submitted && password.errors" class="invalid-feedback">
             <div *ngIf="password.errors['required']">Password is required</div>
@@ -136,9 +131,9 @@
           </div>
         </div>
         <br>
-        <button type="submit" class="genric-btn success circle" [disabled]="adminForm.form.invalid">OK</button> &nbsp;
+        <button type="submit" class="genric-btn success ">OK</button> &nbsp;
         <button type="submit" (click)="onReset(adminForm)"
-        class="genric-btn info circle">Clear</button>
+        class="genric-btn info float-right">Clear</button>
        </form>
        
        <br>
@@ -163,7 +158,7 @@
         #pwdForm="ngForm"
         (ngSubmit)="pwdForm.form.valid && resetAdmin()">
         <div>
-          <strong>{{rpwdemail}}</strong><label for=""></label>
+          <h4>{{rpwdemail}}</h4>
         </div><br>
           <div class="form-group">
             <label for="">Password</label><br>
@@ -194,6 +189,7 @@
               </div>
           </div><br>
         </div>
+        <br>
           <div class="form-group">
             <label for="">Confirm password</label><br>
             <input type="password" 
@@ -205,19 +201,14 @@
             class="form-control single-input-secondary"
             [(ngModel)]="rpwd.cpwd"
             #pwd="ngModel">
-            <small class="errdisplay" style="font-size:14px;">{{cmppwd}}</small>
+            <small class="errdisplay text-danger" style="font-size:14px;">{{cmppwd}}</small>
             
           </div>
           
           <br>
          
-         <button type="submit" 
-         class="genric-btn success " 
-         (click)="resetAdmin()"
-         [disabled]="pwdForm.form.invalid"> Ok</button>
-         <button type="submit" 
-         class="genric-btn primary  
-         float-right"
+         <button type="submit" class="genric-btn success " > Ok</button>
+         <button type="submit" class="genric-btn primary  float-right"
          (click)="onReset(pwdForm)">Clear</button>
         </form>
         </div>

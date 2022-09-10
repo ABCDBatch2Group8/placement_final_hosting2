@@ -23,7 +23,7 @@ showform="none";
 courses:Courses[]=[];
 list:any;
 ref:any;
-
+server_address: string = 'http://localhost:3000';
 Course={
   course:'',
   category:'',
@@ -42,14 +42,10 @@ caegory!:string
     this.getCourses();
   }
 getCourses(){
-  this.http.get<any>("http://localhost:3000/admin/showcourse")
+  this.http.get<any>(`${this.server_address}/admin/showcourse`)
   .subscribe(data=>{
     this.courses=JSON.parse(JSON.stringify(data)) ;
   })
-  // this.admn.courseList().subscribe(respose=>{
-  //   this.course=JSON.stringify( JSON.stringify(respose));
-  //   alert( this.course)
-  // })
 }
 newCourse(){
 
@@ -81,9 +77,6 @@ toDelete(courseid:any){
     .then(() => {
       window.location.reload();
     });
-
-    //this.courses=this.courses.filter(p=>p!=course);
-    // this.router.navigate(['admin/dashboard'])
   })
   }
   popform()

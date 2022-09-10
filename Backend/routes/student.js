@@ -117,7 +117,7 @@ route.get("/signin", (req, res) => {
   });
 });
 
-route.post("/login", (req, res) => {
+route.post("/login",verifyToken, (req, res) => {
   Student.findOne({ email: req.body.email }, function (err, user) {
     if (user === null) {
       console.log("no data found");

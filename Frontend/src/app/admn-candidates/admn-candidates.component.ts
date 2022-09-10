@@ -32,11 +32,13 @@ export class AdmnCandidatesComponent implements OnInit {
     
 
   ngOnInit(): void {
+
+      
   }
   viewStudent(stud:any){
    
     localStorage.setItem('candidateID',stud._id.toString());
-    alert('okkkk')
+    
     this.route.navigate(['admin/studentprofile']);
   }
 

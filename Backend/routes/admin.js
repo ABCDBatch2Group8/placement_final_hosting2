@@ -10,15 +10,30 @@ const courseModel=require('../models/course');
 const employerModel=require('../models/employer');
 const candidateModel=require('../models/candidates');
 const jobsModels=require('../models/job');
-const offerModel=require('../models/admn_offer');
+const placementModel=require('../models/placement');
 
-
+// function verifyToken(req, res, next) {
+//     if(!req.headers.authorization) {
+//       return res.status(401).send('Unauthorized request')
+//     }
+//     let token = req.headers.authorization.split(' ')[1]
+//     if(token === 'null') {
+//       return res.status(401).send('Unauthorized request')    
+//     }
+//     let payload = jwt.verify(token, 'secretKey')
+//     if(!payload) {
+//       return res.status(401).send('Unauthorized request')    
+//     }
+//     req.userId = payload.subject
+//     next()
+//   }
 
 
 //ADMIN LOGIN
 
-router.post('/login',async(req,res)=>{
-    try{
+router.post('/login', async(req,res)=>{
+    res.header("Access-Control-Allow-origin","*");
+    res.header("Access-Control-Allow-Methods:GET, POST, PATCH, PUT, DELETE, OPTIONS");
     
         const email=req.body.email;
         const password=req.body.password;
@@ -37,7 +52,8 @@ router.post('/login',async(req,res)=>{
             
             res.json({message:"Login successful",
                       status:"success",
-                    tok:token})
+                    tok:token
+                });
         }
         else
         {
@@ -46,19 +62,15 @@ router.post('/login',async(req,res)=>{
             res.json({message:"Password not matching",
                 status:"fail"})
         }
-    }
-    catch(error)
-    {
-        //res.status(400).send("invalid email");
-        console.log('invalid email')
-        res.json({"success":"false","msg":"invalid email"})
-    }
     
-})
+    
+}); 
+
 
 //ADMIN SIGN UP
 
 router.post('/signup',(req,res)=>{
+    console.log('hai')
     console.log("email :",req.body.email)
     console.log(req.body.email)
     adminModel.findOne({'email':req.body.email},function(err,user){
@@ -232,13 +244,17 @@ router.delete('/deletecourse/:id',(req,res)=>{
 router.post('/offer',(req,res)=>{
     console.log("req.body",req.body);
         const placement = {
-          candidateid: req.body.candidateid,
-          company: req.body.company,
-          designation: req.body.designation,
-          offer_date: req.body.offer_date,
-          ctc_per_annum: req.body.ctc_per_annum
+            job_id: req.body.jobid,
+            dwms_id: req.body.dwmsid,
+            email: req.body.email,
+            batch:req.body.batch,
+            name:req.body.name,
+            company: req.body.company,
+            designation: req.body.designation,
+            offer_date: req.body.offer_date,
+            ctc_per_annum: req.body.ctc_per_annum
         }
-        var offer=new offerModel(placement);
+        var offer=new placementModel(placement);
         offer.save()
         .then(data => {
             res.json({"message":"Successfully registered", "status":"success"});
@@ -250,13 +266,25 @@ router.post('/offer',(req,res)=>{
         })   
       });
 
-      router.get('/getoffers/:id',(req,res)=>{
-        id=req.params.id;
-        offerModel.findById({'_id':id})
-        .then((joboffers)=>{
-            res.send(joboffers)
-        })
-      })
+      //GET OFFERS
+      router.get("/history/:id", async (req, res) => {
+        console.log("in history (get req) :", req.params);
+        try {
+          const id = req.params.id;
+          const applicant_data = await jobsModels.find({
+            applicants: { $elemMatch: { stud_ref: id } },
+          });
+          // res.json(stud_data);
+          console.log("applicants found (in history):" + applicant_data);
+          res.send(applicant_data);
+        } catch (err) {
+          console.log("profile data not correct");
+          res.json({ message: "data not fetched" });
+        }
+      });
+
+    
+      
 
 //Biju
 

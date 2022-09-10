@@ -17,12 +17,6 @@ export class AdmnLoginComponent implements OnInit {
     private headservice : HeaderService
     ) { }
 
-  constructor(
-    private admnauth:AdmnAuthService,
-    private router:Router,
-    private headservice : HeaderService
-    ) { }
-
   ngOnInit(): void {
     this.headservice.setMenu("general");
   }
@@ -56,14 +50,26 @@ loginAdmin(){
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
     })
-    this.router.navigate(['admin'])
+    // this.router.navigate(['admin'])
   }
   else{
-    alert("invalid email")
-  }
+    Swal.fire({
+      toast: true,
+      color: 'blue',
+      background: 'white',
+      icon: 'error',
+      title: "invalid info",
+      position: 'center',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mousecenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
   
- })
- }
+   })
+  }
+})
 }
- 
-
+}

@@ -40,14 +40,13 @@ import { JobViewComponent } from './job-view/job-view.component';
 import { JobUpdateComponent } from './job-update/job-update.component';
 import { JobShortlistComponent } from './job-shortlist/job-shortlist.component';
 import { OfferAddComponent } from './offer-add/offer-add.component';
-<<<<<<< HEAD
+
 import { AdmnStudprofileComponent } from './admn-studprofile/admn-studprofile.component';
 import { AdmnChildGuard } from './admn-child.guard';
-=======
 import { AdmnJobapplicationsComponent } from './admn-jobapplications/admn-jobapplications.component';
 import { JobApplnStatusComponent } from './job-appln-status/job-appln-status.component';
 import { LogoutComponent } from './logout/logout.component';
->>>>>>> fa25254719a023a595c5162c1d5112596a2b4da4
+
 
 
 
@@ -86,9 +85,11 @@ const routes: Routes = [
   
   ]
   },
-  {path : "admin", component : AdminComponent,canActivate:[AdmnAuthGuard],
-  canActivateChild:[AdmnChildGuard],
-  children : [
+  {path : "admin", canActivate:[AdmnAuthGuard],
+  children:[
+    {path:'',component:AdmnLoginComponent},
+    {path:'',canActivateChild:[AdmnChildGuard],
+    children:[
     {path : "", component : AdmnLoginComponent},
     {path : "dashboard", component : AdmnDashboardComponent},
     {path : "courses",component:AdmnCourseComponent},
@@ -101,15 +102,14 @@ const routes: Routes = [
     {path:  "adminlist",component : AdmnListComponent},
     {path : "addemployer", component : AdmnAddemployerComponent},
     {path : "joblist", component : AdmnJobsComponent},
-<<<<<<< HEAD
-    {path:"studentprofile",component:AdmnStudprofileComponent}
-=======
-    {path : "applications/:id", component :AdmnJobapplicationsComponent}
->>>>>>> fa25254719a023a595c5162c1d5112596a2b4da4
-  ]
-  },
-  {path : "logout", component : LogoutComponent }
-];
+    {path:"studentprofile",component:AdmnStudprofileComponent},
+    {path : "applications/:id", component :AdmnJobapplicationsComponent},
+    {path : "logout", component : LogoutComponent }
+    ]
+  }
+]
+  }
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

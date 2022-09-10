@@ -22,6 +22,7 @@ displayStyle = "none";
 showform="none";
 ref:any;
 num:any;
+server_address: string = 'http://localhost:3000';
 student={
   firstname:'',
   lastname:'',
@@ -43,7 +44,7 @@ email!:string
     this.getStudents();
   }
   getStudents(){
-    this.http.get<any>("http://localhost:3000/admin/students").subscribe(
+    this.http.get<any>(`${this.server_address}/admin/students`).subscribe(
       response=>{
         this.students=response;
         console.log(response)

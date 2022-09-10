@@ -41,7 +41,7 @@ export class AdmnListComponent implements OnInit {
   password:any
   cpassword:any
   admnID:any;
-
+  server_address: string = 'http://localhost:3000';
   msg:any;
 
   constructor(
@@ -56,7 +56,7 @@ export class AdmnListComponent implements OnInit {
     this.getAdmin()
   }
   getAdmin(){
-    this.http.get("http://localhost:3000/admin/admins").subscribe(
+    this.http.get(`${this.server_address}/admin/admins`).subscribe(
       response=>{
         this.admin=response;
         console.log(response)
@@ -96,7 +96,7 @@ export class AdmnListComponent implements OnInit {
     this.admn.newAdmin(newadmin)
     .subscribe((data)=>{
       this.msg=JSON.parse(JSON.stringify(data))
-      alert('yes')
+      
     })
     
     this.router.navigate(['admin/adminlist'])
@@ -123,12 +123,12 @@ export class AdmnListComponent implements OnInit {
     }
     resetAdmin(){
 
-      alert(this.rpwdid)
+      
       const newpwd={
         pwd:this.rpwd.pwd,
         cpwd:this.rpwd.cpwd
       }
-      alert(newpwd.pwd)
+      
       if(newpwd.pwd===newpwd.cpwd){
         this.admn.editAdmin(this.rpwdid,newpwd.pwd);
         this.router.navigate(['admin/adminlist'])
