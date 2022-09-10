@@ -23,13 +23,10 @@
   <div class="list">
     <ng-container *ngFor="let item of jobs">
       <div
-        class="my-5 pl-40 py-3 bg-light align-items-center justify-content shadow p-3 mb-5 bg-white rounded"
-      >
+        class="my-5 pl-40 py-3 bg-light align-items-center justify-content shadow p-3 mb-5 bg-white rounded">
         <h5>
           <span class="text-info">{{ item.position }}</span>
         </h5>
-        <!-- <h1 class="my-2 font-weight-bold">sdfs</h1>  -->
-
         <div class="row">
           <div class="col">
             <p>
@@ -38,21 +35,21 @@
           </div>
           <div class="col">
             <p>
-              <i class="fas fa-briefcase text-secondary" aria-hidden="true"></i
-              >{{ item.experience }}
+              <i class="fas fa-briefcase text-secondary" aria-hidden="true"></i>
+              {{ item.experience }}
             </p>
           </div>
           <div class="col">
             <p>
-              <i class="fas fa-map-marker-alt text-primary"></i
-              >{{ item.location }}
+              <i class="fas fa-map-marker-alt text-primary"></i>
+              {{ item.location }}
             </p>
           </div>
         </div>
         <div class="text-uppercase text-secondary">
           <p class="txt">
-            <i class="fas fa-file-alt" aria-hidden="true"></i
-            ><small>{{ item.jd_text }}</small>
+            <i class="fas fa-file-alt" aria-hidden="true"></i>
+            <small>{{ item.jd_text }}</small>
           </p>
 
           <div class="row">
@@ -60,28 +57,13 @@
             <div class="col">
               
               <p *ngIf="ite.application_status =='shortlisted'&&stu == ite.stud_ref">
-                <i class="fas fa-check-circle" aria-hidden="true"></i
-                  
-                ><small class="text-primary"> {{ite.application_status}}</small>
+                <i class="fas fa-check-circle" aria-hidden="true"></i> 
+                <small class="text-primary"> {{ite.application_status}}</small>
               </p>
-            </div>
-            
+            </div> 
           </ng-container>
-            <!-- <div class="col">
-              <p>
-                <i class="fas fa-check-circle"></i
-                ><small class="text-primary">Application Status</small>
-              </p>
-            </div> -->
-            <div>
-              <!-- <ng-container  *ngFor="let ite of item.applicants"> -->
-                <!-- <p>{{ite.application_status}}</p> -->
-                 <!-- <p  *ngIf="ite.application_status =='shortlisted'">{{ite.application_status}}</p> -->
-                <!-- <ng-template #asa> not shortlisted</ng-template> -->
-              <!-- </ng-container> -->
-            </div>
           </div>
-          <!-- <small class="d-block">247</small> -->
+         
         </div>
         <div class="text-uppercase text-primary">
           <a

@@ -47,6 +47,7 @@ export class AdmnStudprofileComponent implements OnInit {
   offerView:any;
   title = 'Employers';
   emp:any;
+  studid:any;
 
   offer={
     company:'',
@@ -72,19 +73,12 @@ export class AdmnStudprofileComponent implements OnInit {
 
   ngOnInit(): void {
     this.headservice.setMenu("general");
-    let studid=localStorage.getItem('candidateID');
-    this.admn.getCandidate(studid).subscribe((data)=>{
+     this.studid=localStorage.getItem('candidateID');
+    this.admn.getCandidate(this.studid).subscribe((data)=>{
       this.studentView=JSON.parse(JSON.stringify(data));
 
       this.admn.getEmployers().subscribe(data=>{
         this.emp=JSON.parse(JSON.stringify(data))
-
-        this.admn.getoffers(studid).subscribe((data)=>{
-          this.jobs=JSON.parse(JSON.stringify(data))
-
-        // this.admn.getoffers(studid).subscribe((values)=>{
-        //   this.offerView=JSON.parse(JSON.stringify(values))
-        })
       })
     })
   }

@@ -10,23 +10,6 @@ const { json } = require("express");
 const jwt = require('jsonwebtoken');
 
 
-function verifyToken(req, res, next) {
-  if(!req.headers.authorization) {
-    return res.status(401).send('Unauthorized request')
-  }
-  let token = req.headers.authorization.split(' ')[1]
-  if(token === 'null') {
-    return res.status(401).send('Unauthorized request')    
-  }
-  let payload = jwt.verify(token, 'secretKey')
-  if(!payload) {
-    return res.status(401).send('Unauthorized request')    
-  }
-  req.userId = payload.subject
-  next()
-}
-
-
 // file upload using multer
 const storage = multer.diskStorage({
   destination: (req, file, callBack) => {
@@ -117,7 +100,7 @@ route.get("/signin", (req, res) => {
   });
 });
 
-route.post("/login",verifyToken, (req, res) => {
+route.post("/login", (req, res) => {
   Student.findOne({ email: req.body.email }, function (err, user) {
     if (user === null) {
       console.log("no data found");
