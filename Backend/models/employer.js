@@ -7,7 +7,8 @@ const EmployerSchema = mongoose.Schema({
     },
     email : {
         type : String,
-        required: true
+        required: true,
+        index: { unique: true}
     },
     phone : {
         type : String,
