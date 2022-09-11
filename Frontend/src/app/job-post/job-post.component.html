@@ -48,6 +48,7 @@
         />
         <div *ngIf="f.submitted && position.errors" class="invalid-feedback">
           <div *ngIf="position.errors['required']">Position is required</div>
+          <div *ngIf="position.errors['pattern']">Please enter a number</div>
         </div>
       </div>
       <div class="form-group">
@@ -75,6 +76,7 @@
           name="number"
           [(ngModel)]="addJob.number"
           required
+          pattern="([1-9]|[1-9][0-9]|[1-9][0-9][0-9])"
           #number="ngModel"
           [ngClass]="{ 'is-invalid': f.submitted && number.errors }"
         />
@@ -116,7 +118,7 @@
           [(ngModel)]="addJob.location"
           required
           #location="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && number.errors }"
+          [ngClass]="{ 'is-invalid': f.submitted && location.errors }"
         />
         <div *ngIf="f.submitted && location.errors" class="invalid-feedback">
           <div *ngIf="location.errors['required']">Location is required</div>
@@ -131,14 +133,17 @@
           name="start_date"
           [(ngModel)]="addJob.start_date"
           required
+          pattern="^\d{4}-([0]\d|1[0-2])-([0-2]\d|3[01])$"
           #start_date="ngModel"
           [ngClass]="{ 'is-invalid': f.submitted && start_date.errors }"
         />
         <div *ngIf="f.submitted && start_date.errors" class="invalid-feedback">
           <div *ngIf="start_date.errors['required']">Start date is required</div>
+          <div *ngIf="start_date.errors['pattern']">Please enter a valid date</div>
+          <div *ngIf="start_date.errors['pattern']">Please enter the date in YYYY-MM-DD format </div>
         </div>
-      </div>
-      <div class="form-group">
+        </div>
+        <div class="form-group">
         <!-- <label>End Date</label> -->
         <input
           type="text"
@@ -147,11 +152,14 @@
           name="end_date"
           [(ngModel)]="addJob.end_date"
           required
+          pattern="^\d{4}-([0]\d|1[0-2])-([0-2]\d|3[01])$"
           #end_date="ngModel"
           [ngClass]="{ 'is-invalid': f.submitted && end_date.errors }"
         />
         <div *ngIf="f.submitted && end_date.errors" class="invalid-feedback">
           <div *ngIf="end_date.errors['required']">End date is required</div>
+          <div *ngIf="end_date.errors['pattern']">Please enter a valid date</div>
+          <div *ngIf="end_date.errors['pattern']">Please enter the date in YYYY-MM-DD format </div>
         </div>
       </div>
     
