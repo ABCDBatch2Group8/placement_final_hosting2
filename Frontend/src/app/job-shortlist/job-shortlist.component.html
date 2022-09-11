@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h4 style="color: white ;">Choose filters for shotlisting</h4>
+                        <h3 style="color: white ;">Choose filters for shotlisting</h3>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for = "skills">Match skills listed in the JD</label>
-                <select id="passout" name="skills" [(ngModel)]="skillsReq" (change)='onOptionsSelected3($event)' class="form-control">
+                <select id="skills" name="skills" [(ngModel)]="skillsReq" (change)='onOptionsSelected3($event)' class="form-control">
                     <option value=0>No</option>
                     <option value=1>Yes</option>
                 </select>
@@ -89,7 +89,7 @@
                           <th>Qualification</th>
                           <th>Stream</th>
                           <th>Passout</th>
-                          <th>Skills</th>
+                          <th>Email</th>
                           <th>Employment status</th>
                           <th>Career Break</th>
                           <th>ICTAK course</th>
@@ -97,12 +97,12 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr *ngFor = 'let data of shortlistData, '>
+                      <tr *ngFor = 'let data of shortlistData'>
     
                           <td>{{ data.qualification }}</td>
                           <td>{{ data.stream }}</td>
                           <td>{{ data.YearOfPassout }}</td>
-                          <td>{{ skilsList }}</td>
+                          <td>{{ data.email }}</td>
                           <td>{{ data.employmentStatus }}</td>
                           <td>{{ data.careerBreak }}</td>
                           <td>{{ data.courseInICTAK }}</td>

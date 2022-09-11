@@ -30,7 +30,7 @@ export class StudSignupComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.headservice.setMenu("student");
+    this.headservice.setMenu("general");
     this.auth.course().subscribe((data: any) => {
       this.Course = JSON.parse(JSON.stringify(data));
       console.log(data);

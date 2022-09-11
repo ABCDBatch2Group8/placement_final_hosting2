@@ -43,12 +43,28 @@ export class JobPostComponent implements OnInit {
       unSelectAllText: 'UnSelect All',
       // limitSelection: 5,
       allowSearchFilter: true
-    };
-    
+    }; 
   }
+
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+
   
 AddJob(){
-    // this.addJob.emp_ref = localStorage.getItem('EmpId');
+
+    var d1 = new Date(this.addJob.start_date);
+    var d2 = new Date(this.addJob.end_date);
+    var valid = d1.getTime() < d2.getTime();
+    var invalid = d1.getTime() > d2.getTime();
+
+    if (invalid)  {
+      alert("Application open  date should not be past the close date")
+    }
+    
     this.addJob.emp_ref = localStorage.getItem('EmpId');
     this.addJob.company = localStorage.getItem('EmpComp')
     this.addJob.skills = this.selectedItems;

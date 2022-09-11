@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudAuthService } from '../stud-auth.service';
 import { Router } from '@angular/router';
 import { HeaderService } from '../header.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-stud-form-p2',
@@ -35,7 +36,7 @@ export class StudFormP2Component implements OnInit {
    // careerBreak : {type : String},
    // breakDuration : {type:Number}  (no need)
 
-  constructor(private _auth:StudAuthService ,private headservice : HeaderService) { }
+  constructor(private _auth:StudAuthService ,private headservice : HeaderService,private router: Router) { }
 
   ngOnInit(): void {
     this.headservice.setMenu("student");
@@ -60,8 +61,21 @@ export class StudFormP2Component implements OnInit {
     this._auth.EditProfile2(this.Signin);
     // localStorage.removeItem("EmpId")
     // To be removed when logging out
-    alert("success");
-    // this.router.navigate(['/employer/dashboard'])
+    Swal.fire({
+      toast: true,
+      color: 'green',
+      background: 'yellow',
+      icon: 'success',
+      title: 'profile updated successfully',
+      position: 'center-right',
+      showConfirmButton: false,
+      timer: 2000,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+    this.router.navigate(['/student/home']);
 
   }
 

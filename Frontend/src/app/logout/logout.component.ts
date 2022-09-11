@@ -20,15 +20,16 @@ export class LogoutComponent implements OnInit {
       localStorage.removeItem('EmpComp');
       localStorage.removeItem('EmpId');
       localStorage.removeItem('JobId');
+      localStorage.removeItem('empToken');
       this.router.navigate(['employer'])
 
     }
 
     else if (this.authsect == "student") {
       localStorage.removeItem('AuthUser');
-      localStorage.removeItem('Token');
-      localStorage.removeItem('Job');
-      localStorage.removeItem('Stud-id');
+      localStorage.removeItem('stud-token');
+      localStorage.removeItem('job');
+      localStorage.removeItem('stud-id');
       this.router.navigate(['student'])
 
     }

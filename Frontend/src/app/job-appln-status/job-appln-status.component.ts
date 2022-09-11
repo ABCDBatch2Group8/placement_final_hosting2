@@ -47,4 +47,11 @@ export class JobApplnStatusComponent implements OnInit {
     
   }
 
+  public onOptionsSelected4(event: any) {
+    const value1 = event.target.value;
+
+    this.upAppStatus = value1;
+    console.log("value1 is", value1);
+  }
+
 }

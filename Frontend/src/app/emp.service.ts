@@ -8,8 +8,7 @@ import { getCurrencySymbol } from '@angular/common';
 })
 export class EmpService {
   server_address: string = 'http://localhost:3000';
-  // message : String = " ";
-  // EmpServerErr: Boolean = false;
+  
 
   constructor(private http: HttpClient) { }
 
@@ -18,12 +17,7 @@ export class EmpService {
     return this.http.post<any>(`${this.server_address}/employer/signup`, { "employer": addemp })
       .subscribe(
         res => {
-          // this.message = res.message 
-          // this.EmpServerErr = res.EServErr
-          // console.log("res.EServErr",res.EServErr);
-          // console.log("res.message",res.message)
-
-          Swal.fire({
+            Swal.fire({
             toast: true,
             color: 'green',
             background: 'grey',
@@ -47,10 +41,6 @@ export class EmpService {
 employerLogin(user:any){
   console.log("user in service",user)
   return this.http.post<any>(`${this.server_address}/employer/login`,{"employer": user})
-  // .subscribe((data)=>{
-  //   console.log('success')
-  //   console.log(data)
-  // })
 }
 
 empProf(id:any){
@@ -60,7 +50,13 @@ empProf(id:any){
 EdProf(emp:any){
   console.log("Profile update");
     return this.http.put<any>(`${this.server_address}/employer/profile/update/`,emp)
-    .subscribe(data => {console.log(data)})
+}
+
+loggedIn(){
+  return !!localStorage.getItem('empToken')
+}
+getToken(){
+  return localStorage.getItem('empToken');
 }
 
 }

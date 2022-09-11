@@ -26,57 +26,7 @@ export class JobShortlistComponent implements OnInit {
 
   constructor(private headservice : HeaderService,private jobService: JobService, private auth: StudAuthService, private router: Router) { }
 
-  // *********************query1
-
-
-  // params = new HttpParams()
-  // .set ('jobId'," ")
-  // .set ( 'yop', 0)
-  //******************* Query1
-
-  // ************************query2
-  //  readonly params = new HttpParams()
-
-  //  .set('jobId','6310e2fca086dd21ce2f2a0e')
-  //  .set('course','Cyber Security Analyst')
-  // ************************query2
-
-  // ************************query3
-  // sel_skills = JSON.stringify(['express','react','mongodb'])
-  // readonly params = new HttpParams()
-  // .set('jobId','6310e2fca086dd21ce2f2a0e')
-
-  // ************************query3
-
-  // ************************query4
-  // readonly params = new HttpParams()
-  // .set('jobId','6310e2fca086dd21ce2f2a0e')
-  // .set ( 'yop', 2017)
-  // .set('course','Cyber Security Analyst')
-
-  // ************************query4
-  // ************************query5
-  // readonly params = new HttpParams()
-  // .set('jobId','6310e2fca086dd21ce2f2a0e')
-  // .set ( 'yop', 2017)
-
-  // ************************query5
-
-  // ************************query6
-  // readonly params = new HttpParams()
-  // .set('jobId','6310e2fca086dd21ce2f2a0e')
-  // .set('course','Cyber Security Analyst')
-
-  // ************************query6
-
-  // ************************query7
-  // readonly params = new HttpParams()
-  // .set('jobId','6310e2fca086dd21ce2f2a0e')
-  // .set ( 'yop', 2017)
-  // .set('course','Cyber Security Analyst')
-
-
-  // ************************query7
+  
   Course = [{
     course: '',
     category: ''
@@ -89,7 +39,7 @@ export class JobShortlistComponent implements OnInit {
     courseInICTAK: '',
     employmentStatus: '',
     qualification: '',
-    skills:Array<any>,
+    email: '',
     stream:''
 
   }]
@@ -100,7 +50,7 @@ export class JobShortlistComponent implements OnInit {
     courseInICTAK: '',
     employmentStatus: '',
     qualification: '',
-    skills:Array<Object>,
+    skills:Array<any>,
     stream:''
   }
   // courseInICT: String = '';
@@ -203,16 +153,6 @@ query1(jobid:any,passout:any){
       .subscribe((data:any)=>{
         this.shortlistData = JSON.parse(JSON.stringify(data));
         console.log("shortlisted", this.shortlistData)
-        for (let i=0;i<this.shortlistData.length;i++){
-             console.log("data1",this.shortlistData[i].skills) 
-          for (let j=0;j<this.shortlistData[i].skills.length;j++){
-            this.skils.push(this.shortlistData[i].skills[j].item_text)
-          }
-          console.log("skils",this.skils);
-          this.skilsList[i] = this.skils.join()
-          console.log("skilList",this.skilsList)
-          this.skils=[]
-        }
         })
 
 }
@@ -311,8 +251,13 @@ query1(jobid:any,passout:any){
 markStatus(data:any){
   
   console.log("update student status params",data._id)
-  this.jobService.markAsShortlist(data._id).subscribe((data:any)=>{
-    console.log("shortlisted", data)
+  let params = new HttpParams()
+    .set ("studRef", data._id)
+    .set ("jobid", (localStorage.getItem("JobId")!))
+    console.log("params is",params)
+    this.jobService.markAsShortlist(params).subscribe((res:any)=>{
+    alert(res.message)
 })
+    alert("The applicant is shortlisted")
 }
 }

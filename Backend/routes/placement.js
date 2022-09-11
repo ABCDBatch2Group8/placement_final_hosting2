@@ -1,10 +1,11 @@
 const express = require ('express');
 const router = express.Router();
 const Placement = require('../models/placement');
+const jwt = require('jsonwebtoken')
 
 
 // Placement update by the employer
-router.post('/add',(req,res)=>{
+router.post('/add', (req,res)=>{
 console.log("req.body offer",req.body);
     const placement = new Placement({
       job_id: req.body.offer.job_id,

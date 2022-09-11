@@ -59,9 +59,9 @@ export class JobService {
   ysc_shortlist(params:any){
     return this.http.get<any>(`${this.server_address}/job/sl/ysc`,{params})
   }
-  markAsShortlist(id:any){
-    console.log("In service id ",id)
-    return this.http.put<any>(`${this.server_address}/job/mark/sl`,id)
+  markAsShortlist(params:any){
+    console.log("In service id ",params)
+    return this.http.get<any>(`${this.server_address}/job/mark/sl`,{params})
   }
 
   getApplicants(params:any){

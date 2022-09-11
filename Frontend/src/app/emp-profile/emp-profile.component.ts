@@ -27,12 +27,15 @@ export class EmpProfileComponent implements OnInit {
   }
   editProf(){
     console.log("In editProf")
-    this.empService.EdProf(this.EmpProf);
-    // localStorage.removeItem("EmpId")
-    // To be removed when logging out
-    alert("success");
+    this.empService.EdProf(this.EmpProf).subscribe((res:any)=>{
+    alert(res.message);
+    })
+    alert("Profile updated");
     this.router.navigate(['/employer/dashboard'])
+  }
 
+  back(){
+    this.router.navigate(['employer/dashboard']);
   }
 
 }

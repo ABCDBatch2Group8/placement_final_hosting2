@@ -28,7 +28,10 @@ app.use('/placement',placement);
 
 const port=process.env.PORT||3000;
 // Connect to db
-mongoose.connect(process.env.dbUrl, {useNewUrlParser: true}, () =>
+mongoose.connect(process.env.dbUrl, {   useNewUrlParser: true
+                                        // useUnifiedTopology: true,
+                                        // useCreateIndex: true       
+                                     }, () =>
     console.log('Connected to DB!')
 );
 // Server

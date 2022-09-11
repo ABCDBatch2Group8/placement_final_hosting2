@@ -117,13 +117,8 @@ import { AdmnStudprofileComponent } from './admn-studprofile/admn-studprofile.co
     DataTablesModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [
-    EmpService,
-    JobService,
-    StudAuthService,
-    SkillService,
-    OfferService,
-  ],
+  providers: [EmpService,JobService,StudAuthService,SkillService,OfferService],
+ 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

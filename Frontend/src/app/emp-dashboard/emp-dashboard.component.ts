@@ -8,6 +8,8 @@ import { HeaderService } from '../header.service';
 })
 export class EmpDashboardComponent implements OnInit {
 
+   title:string = (localStorage.getItem("EmpComp")!)
+
   constructor(private headservice : HeaderService) { }
 
   ngOnInit(): void {

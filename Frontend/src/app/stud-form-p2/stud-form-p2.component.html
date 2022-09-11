@@ -1,349 +1,275 @@
-<div class="slider-area ">
-  <div class="single-slider section-overly d-flex align-items-center"  style="height:150px!important;">
-      <div class="container">
-          <div class="row">
-              <div class="col-xl-12">
-                  <div class="hero-cap text-center">                            
-                      <h2>Profile update</h2>
-                  </div>
-              </div>
+<div class="slider-area">
+  <div
+    class="single-slider section-overly d-flex align-items-center"
+    style="height: 150px !important"
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="hero-cap text-center">
+            <h2>Profile update</h2>
           </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>
 
 <section class="contact-section">
-    <div class="py-5">
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <span class="anchor" id="formLogin"></span>
-          <div class="card rounded-0">
-            <div class="card-header">
-              
+  <div class="py-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <span class="anchor" id="formLogin"></span>
+        <div class="card rounded-0">
+          <div class="card-header"></div>
+          <div class="card-body">
+            <div class="register-form">
+              <form
+                name="form"
+                #f="ngForm"
+                (ngSubmit)="f.form.valid && editProf()"
+                novalidate
+              >
+                <p>Course details</p>
+                <div class="input-group">
+                  <div class="form-group col-md-6">
+                    <label> Course status</label>
+                    <select
+                      type="text"
+                      class="form-control"
+                      name="Coursestatus"
+                      [(ngModel)]="Signin.courseStatus"
+                      #Coursestatus="ngModel"
+                      [ngClass]="{
+                        'is-invalid': f.submitted && Coursestatus.errors
+                      }"
+                    >
+                      <option value="Ongoing">Ongoing</option>
+                      <option value="completed">completed</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label>ICTAK Marks (%)</label>
+                    <input
+                      placeholder="eg:70"
+                      type="text"
+                      class="form-control"
+                      name="ictMarks"
+                      [(ngModel)]="Signin.ictMarks"
+                      required
+                      pattern="^[1-9][0-9]?$|^100$"
+                      #ictMarks="ngModel"
+                      [ngClass]="{
+                        'is-invalid': f.submitted && ictMarks.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="f.submitted && ictMarks.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="ictMarks.errors['required']">
+                        ICTAK marks is required
+                      </div>
+                      <div *ngIf="ictMarks.errors['pattern']">
+                        enter a valid %
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>your Location</label>
+                  <input
+                    placeholder="eg:Ernakulam"
+                    type="text"
+                    class="form-control"
+                    name="password"
+                    [(ngModel)]="Signin.location"
+                    required
+                    minlength="6"
+                    maxlength="40"
+                    #location="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && location.errors }"
+                  />
+                  <div
+                    *ngIf="f.submitted && location.errors"
+                    class="invalid-feedback"
+                  ></div>
+                </div>
+
+                <div class="form-group">
+                  <label>Are you ready to Relocate</label>
+                  <select
+                    type="text"
+                    class="form-control"
+                    name="readyto"
+                    [(ngModel)]="Signin.readyToRelocate"
+                    #readyto="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && readyto.errors }"
+                  >
+                    <option value="yes ">yes</option>
+                    <option value="no">no</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Employment Status</label>
+                  <select
+                    type="text"
+                    class="form-control"
+                    name="employmentStatus"
+                    [(ngModel)]="Signin.employmentStatus"
+                    #employmentStatus="ngModel"
+                    [ngClass]="{
+                      'is-invalid': f.submitted && employmentStatus.errors
+                    }"
+                  >
+                    <option value="employed">employed</option>
+                    <option value="self employed ">self employed</option>
+                    <option value="unemployed ">unemployed</option>
+                    <option value="student ">student</option>
+                  </select>
+                </div>
+
+                <p style="color: blue"><strong>Education details</strong></p>
+
+                <div class="input-group">
+                  <div class="form-group col-md-6">
+                    <label>10th Marks(%)</label>
+                    <input
+                      type="text"
+                      placeholder="eg:70"
+                      class="form-control"
+                      name="marks"
+                      [(ngModel)]="Signin.educationMarks.Mark10"
+                      pattern="^[1-9][0-9]?$|^100$"
+                      #marks="ngModel"
+                      [ngClass]="{ 'is-invalid': f.submitted && marks.errors }"
+                    />
+                    <div
+                      *ngIf="f.submitted && marks.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="marks.errors['required']">
+                        10th Marks is required
+                      </div>
+                      <div *ngIf="marks.errors['pattern']">
+                        please enter a valid mark
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label>12th Marks </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="eg:70"
+                      name="Mark12"
+                      [(ngModel)]="Signin.educationMarks.Mark12"
+                      pattern="^[1-9][0-9]?$|^100$"
+                      #Mark12="ngModel"
+                      [ngClass]="{ 'is-invalid': f.submitted && Mark12.errors }"
+                    />
+                    <div
+                      *ngIf="f.submitted && Mark12.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="Mark12.errors['required']">
+                        12th Marks is required
+                      </div>
+                      <div *ngIf="Mark12.errors['pattern']">
+                        value entered not correct
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Enter Year of passout</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="eg:2020"
+                    name="YearOfPassout"
+                    pattern="[0-9]{4}"
+                    [(ngModel)]="Signin.YearOfPassout"
+                    #YearOfPassout="ngModel"
+                    [ngClass]="{
+                      'is-invalid': f.submitted && YearOfPassout.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="f.submitted && YearOfPassout.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="YearOfPassout.errors['pattern']">
+                      please input the year of passout properly
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Highest qualification Mark(%)</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="qualification"
+                    placeholder="eg:70"
+                    [(ngModel)]="Signin.educationMarks.QualificationMark"
+                    pattern="^[1-9][0-9]?$|^100$"
+                    #qualification="ngModel"
+                    [ngClass]="{
+                      'is-invalid': f.submitted && qualification.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="f.submitted && qualification.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="qualification.errors['required']">
+                      mark required
+                    </div>
+                    <div *ngIf="qualification.errors['pattern']">
+                      enter a valid mark
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Do you have a career break</label>
+                  <select
+                    type="text"
+                    class="form-control"
+                    name="careerBreak"
+                    [(ngModel)]="Signin.careerBreak"
+                    #careerBreak="ngModel"
+                    [ngClass]="{
+                      'is-invalid': f.submitted && careerBreak.errors
+                    }"
+                  >
+                    <option value="0">no career break</option>
+                    <option value="0-2 ">0-2 years</option>
+                    <option value="2+ ">more than 2 years</option>
+                  </select>
+
+                  <div
+                    *ngIf="f.submitted && careerBreak.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="careerBreak.errors['required']">
+                      please fill in the details
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
             </div>
-            <div class="card-body">
-  <div class="register-form">
-    <form
-      name="form"
-      #f="ngForm"
-      (ngSubmit)="f.form.valid && editProf()"
-      novalidate>
-
-      <p>Course details</p>
-      <div class="input-group">
-
-      <div class="form-group  col-md-6">
-        <label> Course status</label>
-        <select  type="text"class="form-control" name="Coursestatus"[(ngModel)]="Signin.courseStatus"
-        #Coursestatus="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && Coursestatus.errors }"
-          >
-          <option value="Ongoing">Ongoing</option>
-          <option value="completed">completed</option>
-         
-        </select>
-          <!-- 
-          
-          name="fullname" -->
-          
-          
-          
-        
-        <!-- <div *ngIf="f.submitted && fullname.errors" class="invalid-feedback">
-          <div *ngIf="fullname.errors['required']">Fullname is required</div>
-        </div> -->
-      </div>
-      
-      <div class="form-group col-md-6">
-        <label>ICTAK Marks (%)</label>
-        <input
-        placeholder="eg:70"
-          type="text"
-          class="form-control"
-          name="ictMarks"
-          [(ngModel)]="Signin.ictMarks"
-          required
-          pattern="^[1-9][0-9]?$|^100$"
-          #ictMarks="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && ictMarks.errors }"
-        />
-         <div *ngIf="f.submitted && ictMarks.errors" class="invalid-feedback">
-          <div *ngIf="ictMarks.errors['required']">ICTAK marks is required</div>
-          <div *ngIf="ictMarks.errors['pattern']">enter a valid % </div>
-          <!-- <div *ngIf="ictMarks.errors['email']">Email is invalid</div> -->
-        </div> 
-      </div>
-    </div>
-      <div class="form-group">
-        <label>your Location</label>
-        <input
-        placeholder="eg:Ernakulam"
-          type="text"
-          class="form-control"
-          name="password"
-          [(ngModel)]= "Signin.location"
-          required
-          minlength="6"
-          maxlength="40"
-          #location="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && location.errors }"
-        />
-        <div *ngIf= "f.submitted && location.errors" class="invalid-feedback">
-          <!-- <div *ngIf= "password.errors['required']">Password is required</div> -->
-          <!-- <div *ngIf= "location.errors['minlength']">
-            Password must be at least 3 characters
-          </div> -->
-          <!-- <div *ngIf="password.errors['maxlength']"> -->
-            <!-- Username must not exceed 40 characters -->
-          <!-- </div> -->
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label>Are you ready to Relocate</label>
-        <select
-          type="text"
-          class="form-control"
-          name="readyto"
-          [(ngModel)]= "Signin.readyToRelocate"
-          
-          #readyto="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && readyto.errors }"
-          >
-          <option value="yes ">yes</option>
-          <option value="no">no</option>
-       
-      </select>
-      </div>
-        <!-- <div *ngIf= "f.submitted && readyto.errors" class="invalid-feedback">
-           <div *ngIf= "readyto.errors['required']">DWMS ID is required</div> 
-        </div> -->
-      <!-- </div> -->
-
-  
-      <div class="form-group">
-        <label>Employment Status</label>
-        <select
-          type="text"
-          class="form-control"
-          name="employmentStatus"
-          [(ngModel)]= "Signin.employmentStatus"
-          
-          #employmentStatus="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && employmentStatus.errors }"
-        >
-        <option value="employed">employed</option>
-        <option value="self employed ">self employed</option>
-        <option value="unemployed ">unemployed</option>
-        <option value="student ">student</option>
-       
-      </select>
-        <!-- <select
-        type="text"
-        class="form-control"
-        name="careerBreak"
-        [(ngModel)]= "Signin.careerBreak"
-        
-        #careerBreak="ngModel"
-        [ngClass]="{ 'is-invalid': f.submitted && careerBreak.errors }"
-      >
-      <option value="0">no career break</option>
-      <option value="0-2 ">0-2 years</option>
-      <option value="2+ ">more than 2 years</option>
-     
-    </select> -->
-        <!-- <div *ngIf="f.submitted && employmentStatus.errors" class="invalid-feedback"> -->
-          <!-- <div *ngIf="employmentStatus.errors['required']">CONTACT NUMBER is required</div> -->
-        <!-- </div> -->
-      </div>
-      
-        <p style="color:blue;"><strong>Education details</strong></p>
-
-        <div class="input-group">
-      <div class="form-group col-md-6" >
-        <label>10th Marks(%)</label>
-        <input
-          type="text"
-          placeholder="eg:70"
-          class="form-control"
-          name="marks"
-          [(ngModel)]= "Signin. educationMarks.Mark10"
-          pattern="^[1-9][0-9]?$|^100$"
-          #marks="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && marks.errors }"
-        />
-         <div *ngIf= "f.submitted && marks.errors" class="invalid-feedback">
-          <div *ngIf= "marks.errors['required']">10th Marks is required</div>
-          <div *ngIf= "marks.errors['pattern']">please enter a valid mark</div>
-        </div> 
-      </div>
-
-      <div class="form-group col-md-6">
-        <label>12th Marks </label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="eg:70"
-          name="Mark12"
-          [(ngModel)]= "Signin.educationMarks.Mark12"
-          pattern="^[1-9][0-9]?$|^100$"
-          #Mark12="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && Mark12.errors }"
-        />
-        <div *ngIf= "f.submitted && Mark12.errors" class="invalid-feedback">
-          <div *ngIf= "Mark12.errors['required']">12th Marks is required</div>
-          <div *ngIf= "Mark12.errors['pattern']">value entered not correct</div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="form-group ">
-      <label>Enter Year of passout</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="eg:2020"
-        name="YearOfPassout"
-        pattern = "[0-9]{4}"
-        [(ngModel)]= "Signin.YearOfPassout"
-      
-        #YearOfPassout="ngModel"
-        [ngClass]="{ 'is-invalid': f.submitted && YearOfPassout.errors }"
-      />
-      <div *ngIf= "f.submitted && YearOfPassout.errors" class="invalid-feedback">
-        <div *ngIf= "YearOfPassout.errors['pattern']">please input the year of passout properly</div>
-      </div>
-    </div>
-
-    <div class="form-group ">
-      <label>Highest qualification Mark(%)</label>
-      <input
-        type="text"
-        class="form-control"
-        name="qualification"
-        placeholder="eg:70"
-        [(ngModel)]= "Signin.educationMarks.QualificationMark"
-        pattern="^[1-9][0-9]?$|^100$"
-        #qualification="ngModel"
-        [ngClass]="{ 'is-invalid': f.submitted && qualification.errors }"
-      />
-      <div *ngIf= "f.submitted && qualification.errors" class="invalid-feedback">
-        <div *ngIf= "qualification.errors['required']">mark required</div>
-        <div *ngIf= "qualification.errors['pattern']">enter a valid mark</div>
-      </div>
-    </div>
-      <!-- <div class="form-group">
-        <label>stream</label>
-        <input
-          type="text"
-          class="form-control"
-          name="dwmsid"
-          [(ngModel)]="Signin.graduation.branch"
-          required
-          #dwmsid="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && dwmsid.errors }"
-        />
-        <div *ngIf="f.submitted && dwmsid.errors" class="invalid-feedback">
-          <div *ngIf="dwmsid.errors['required']">DWMS ID is required</div>
-        </div>
-      </div> -->
-  
-    
-      <!-- <div class="form-group">
-          <ng-container >
-          <label for="courses">Choose course opted:</label>
-            <select  type="text" class="form-control"name="courseInICT"
-            [(ngModel)]="Signin.courseInICT"required #courseInICT="ngModel"
-            [ngClass]="{ 'is-invalid': f.submitted && courseInICT.errors }" id="course" >
-            <option *ngFor="let item of Course" [value]="item.course">{{item.course}}:{{item.category}}</option>
-            </select>
-            <div *ngIf="f.submitted && courseInICT.errors" class="invalid-feedback">
-          <div *ngIf="courseInICT.errors['required']">please select your course</div>
-        </div>
-          </ng-container>
-      </div> -->
-
-      <div class="form-group">
-        <label>Do you have a career break</label>
-        <select
-          type="text"
-          class="form-control"
-          name="careerBreak"
-          [(ngModel)]= "Signin.careerBreak"
-          
-          #careerBreak="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && careerBreak.errors }"
-        >
-        <option value="0">no career break</option>
-        <option value="0-2 ">0-2 years</option>
-        <option value="2+ ">more than 2 years</option>
-       
-      </select>
-      
-         <div *ngIf= "f.submitted && careerBreak.errors" class="invalid-feedback">
-          <div *ngIf= "careerBreak.errors['required']">please fill in the details</div>
-        </div>
-      </div> 
-      
-      <!-- <select  type="text"class="form-control" name="Coursestatus"[(ngModel)]="Signin.courseStatus"
-        #Coursestatus="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && Coursestatus.errors }"
-          >
-          <option value="Ongoing">Ongoing</option>
-          <option value="Finished">Finished</option>
-         
-        </select> -->
-  
-      <!-- <div class="form-group">
-        <label>YOUR STREAM</label>
-        <input
-          type="text"
-          class="form-control"
-          name="stream"
-          [(ngModel)]="Signin.stream"
-          required
-          #stream="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && stream.errors }"
-        />
-        <div *ngIf="f.submitted && stream.errors" class="invalid-feedback">
-          <div *ngIf="stream.errors['required']">COURSE OPTED is required</div>
-        </div>
-      </div> -->
-      
-      <!-- <div class="form-group form-check">
-        <input
-          type="checkbox"
-          lass="form-control"
-          name="acceptTerms"
-          
-          class="form-check-input"
-          required
-          
-          
-        />
-        <label for="acceptTerms" class="form-check-label">
-          I have read and agree to the Terms
-        </label> -->
-
-        <!-- <div *ngIf="f.submitted && acceptTerms.errors" class="invalid-feedback">
-          Accept Terms is required
-        </div> -->
-      <!-- </div> -->
-      
-      
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <!-- <button
-          type="button"
-          (click)="onReset(f)"
-          class="btn btn-warning float-right">
-          Reset
-        </button> -->
-      </div>
-    </form>
   </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </section>
+</section>

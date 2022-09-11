@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Employer = require('../models/employer');
+const jwt = require('jsonwebtoken')
 
 // Employer signup 
 router.post('/signup', async (req, res) => {
@@ -19,7 +20,8 @@ router.post('/signup', async (req, res) => {
       });
       employer.save()
         .then(data => {
-          res.json({ "message": "Successfully registered", "status": "success" });
+          
+          res.json({ "message": "Successfully registered", "status": "success"});
           console.log("success")
         })
         .catch(err => {
@@ -57,7 +59,9 @@ router.post('/login', (req, res) => {
       if (getUser.disable_status == "N") {
         if (pwd == getUser.password) {
           console.log("Valid login")
-          res.json({ "message": "Login successful", "status": "success", "eid": getUser._id,"company":getUser.title });
+          let payload={subject:getUser.username+getUser.password}
+          let token = jwt.sign(payload,'secretKey')
+          res.json({ "message": "Login successful", "status": "success", "eid": getUser._id,"company":getUser.title,"token":token });
           flag = true
           console.log(getUser);
         }
@@ -86,7 +90,7 @@ router.get('/profile/:id', async (req, res) => {
     console.log("getEmp" + getEmp);
   } catch (err) {
     console.log("In error /profile");
-    res.json({ message: err })
+    res.json({ "message": err })
   }
 });
 

@@ -46,7 +46,7 @@ export class StudLoginComponent implements OnInit {
               console.log("res id is",res.id);
               console.log("token",res.tok);
               localStorage.setItem('stud-id',res.id);
-              localStorage.setItem('token',res.tok);
+              localStorage.setItem('stud-token',res.tok);
               localStorage.setItem("AuthUser","student");
             // localStorage.setItem('token', res.token)
             Swal.fire({

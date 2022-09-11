@@ -1,4 +1,3 @@
-const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -23,7 +22,8 @@ let ApplicantsSchema = new Schema({
 let jobsSchema = new Schema({
   jobid: {
     type: String,
-    required: true
+    required: true,
+    index: { unique: true}
   },
   emp_ref: {
     type: String,

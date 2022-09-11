@@ -8,14 +8,18 @@ import Swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class StudAuthService {
+  server_address: string = 'http://localhost:3000';
+  
+  //    /api
+
   constructor(private http: HttpClient, private _router: Router) {}
   course() {
-    return this.http.get('http://localhost:3000/student/signin');
+    return this.http.get(`${this.server_address}/student/signin`);
   }
   Signin(item: any) {
     // return this.http.post("http://localhost:3000/users/signin",{"users":item})
     return this.http
-      .post('http://localhost:3000/student/signin', { data: item })
+      .post(`${this.server_address}/student/signin`, { data: item })
       .subscribe((data: any) => {
         console.log(data);
         let x = JSON.stringify(data);
@@ -80,61 +84,69 @@ export class StudAuthService {
   }
 
   loginUser(user: any) {
-    return this.http.post<any>('http://localhost:3000/student/login', user);
+    return this.http.post<any>(`${this.server_address}/student/login`, user);
     //  .subscribe((data) =>{console.log(data)})
   }
   getToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem('stud-token');
   }
+
+  // for auth guard
   loggedIn() {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('stud-token');
   }
   stud_dashboard(id: any) {
-    return this.http.get<any>('http://localhost:3000/student/dashboard/' + id);
+    return this.http.get<any>(`${this.server_address}/student/dashboard/` + id);
   }
 
   EditProfile(stud: any) {
     console.log('Profile update');
     return this.http
-      .put<any>('http://localhost:3000/student/dashboard/update', stud)
+      .put<any>(`${this.server_address}/student/dashboard/update`, stud)
       .subscribe((data: any) => {
         console.log(data);
       });
   }
   getSkill() {
-    return this.http.get<any>('http://localhost:3000/student/skill');
+    return this.http.get<any>(`${this.server_address}/student/skill`);
   }
   EditProfile2(stud: any) {
     console.log('Profile update');
     return this.http
-      .put<any>('http://localhost:3000/student/dashboard/update2', stud)
+      .put<any>(`${this.server_address}/student/dashboard/update2`, stud)
       .subscribe((data: any) => {
         console.log(data);
       });
   }
   joblist() {
-    return this.http.get('http://localhost:3000/student/jobListing');
+    return this.http.get(`${this.server_address}/student/jobListing`);
   }
   job_applypage(id: any) {
-    return this.http.get<any>('http://localhost:3000/student/job/' + id);
+    return this.http.get<any>(`${this.server_address}/student/job/` + id);
     // console.log
   }
   application(val: any) {
     console.log('in service');
-    return this.http.put<any>('http://localhost:3000/student/applyjob', val);
+    return this.http.put<any>(`${this.server_address}/student/applyjob`, val);
   }
   upload(file: any): Observable<any> {
     // create form data
     const formData = new FormData();
     formData.append('file', file); //there was file.name
-    return this.http.post<any>('http://localhost:3000/student/file', formData);
+    return this.http.post<any>(`${this.server_address}/student/file`, formData);
   }
 
   job_history(id: any) {
-    return this.http.get<any>('http://localhost:3000/student/history/' + id);
+    return this.http.get<any>(`${this.server_address}/student/history/` + id);
     // console.log
   }
-  download(name:any){
-    return this.http.get("http://localhost:3000/student/getfile/"+name,{responseType:'blob'})
+  download(name: any) {
+    return this.http.get(`${this.server_address}/student/getfile/` + name, {
+      responseType: 'blob',
+    });
   }
+
+  
+ 
 }
+

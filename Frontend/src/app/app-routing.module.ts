@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes} from  '@angular/router';
 import { AdmnAuthGuard } from './admn-auth.guard';
+import { EmpAuthGuard } from './emp-auth.guard';
 
 // import {  } from "@angular/";
 import { AdminComponent } from './admin/admin.component';
@@ -46,6 +47,7 @@ import { AdmnChildGuard } from './admn-child.guard';
 import { AdmnJobapplicationsComponent } from './admn-jobapplications/admn-jobapplications.component';
 import { JobApplnStatusComponent } from './job-appln-status/job-appln-status.component';
 import { LogoutComponent } from './logout/logout.component';
+import { StudGuard } from './stud.guard';
 
 
 
@@ -57,15 +59,15 @@ const routes: Routes = [
     {path : "", component : EmpLoginComponent},
     {path : "login", component : EmpLoginComponent},
     {path : "signup", component : EmpSignupComponent},
-    {path : "dashboard", component: EmpDashboardComponent},
-    {path : "profile", component: EmpProfileComponent},
-    {path : "job-post", component: JobPostComponent },
-    {path : "job-list", component: JobListComponent },
-    {path : "job-view", component: JobViewComponent },
-    {path : "job-update", component: JobUpdateComponent },
-    {path : "job-shortlist", component: JobShortlistComponent },
-    {path : "offer-add", component: OfferAddComponent },
-    {path : "appln-status", component: JobApplnStatusComponent }
+    {path : "dashboard",canActivate:[EmpAuthGuard], component: EmpDashboardComponent},
+    {path : "profile", canActivate:[EmpAuthGuard], component: EmpProfileComponent},
+    {path : "job-post", canActivate:[EmpAuthGuard], component: JobPostComponent },
+    {path : "job-list", canActivate:[EmpAuthGuard], component: JobListComponent },
+    {path : "job-view", canActivate:[EmpAuthGuard], component: JobViewComponent },
+    {path : "job-update", canActivate:[EmpAuthGuard], component: JobUpdateComponent },
+    {path : "job-shortlist", canActivate:[EmpAuthGuard], component: JobShortlistComponent },
+    {path : "offer-add", canActivate:[EmpAuthGuard], component: OfferAddComponent },
+    {path : "appln-status", canActivate:[EmpAuthGuard], component: JobApplnStatusComponent }
     
   ]
   },
@@ -74,14 +76,14 @@ const routes: Routes = [
     {path : "", component : StudLoginComponent},
     {path : "login", component : StudLoginComponent},
     {path : "signup", component : StudSignupComponent},
-    {path : "job", component :StudJoblistComponent},
-    {path : "contact", component :StudContactUspageComponent},
-    {path : "profile", component :StudProfilepageComponent},
-    {path : "settings", component :StudSettingspageComponent},
-    {path : "updatepg2", component :StudFormP2Component},
-    {path : "apply", component :StudApplyComponent},
-    {path : "home", component : StudHomeComponent},
-    {path : "history", component : StudJobhistoryComponent}
+    {path : "job", canActivate:[StudGuard], component :StudJoblistComponent},
+    {path : "contact",canActivate:[StudGuard], component :StudContactUspageComponent},
+    {path : "profile", canActivate:[StudGuard],component :StudProfilepageComponent},
+    {path : "settings", canActivate:[StudGuard],component :StudSettingspageComponent},
+    {path : "updatepg2",canActivate:[StudGuard], component :StudFormP2Component},
+    {path : "apply",canActivate:[StudGuard], component :StudApplyComponent},
+    {path : "home", canActivate:[StudGuard],component : StudHomeComponent},
+    {path : "history",canActivate:[StudGuard], component : StudJobhistoryComponent}
   
   ]
   },
