@@ -50,7 +50,7 @@
                         <td>{{ data.email }}</td>
                         <td>{{ data.application_status }}</td>
                         <td>
-                            <label for = "status">Choose the current status to Update</label>
+                            <label for = "status">Choose the status to be updated</label>
                             <select id="status" name="status" [(ngModel)]="upAppStatus" (change)='onOptionsSelected4($event)' class="form-control">
                                 <option value="screening1">screening1</option>
                                 <option value="screening2">screening2</option>
