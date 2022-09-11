@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudAuthService } from '../stud-auth.service';
 import Swal from 'sweetalert2';
 import { HeaderService } from '../header.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stud-apply',
@@ -24,7 +25,7 @@ export class StudApplyComponent implements OnInit {
     skills: [{ item_text: '' }],
   };
   buttonDisabled: Boolean = false;
-  constructor(private _apply: StudAuthService, private headservice : HeaderService) {}
+  constructor(private _apply: StudAuthService, private headservice : HeaderService,private router: Router) {}
 
   ngOnInit(): void {
     this.headservice.setMenu("student");
@@ -72,5 +73,6 @@ export class StudApplyComponent implements OnInit {
     this._apply.application(val).subscribe((data) => {
       console.log(data);
     });
+    this.router.navigate(['/student/home']);
   }
 }
