@@ -6,7 +6,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class JobService {
 
-  server_address: string = 'http://localhost:3000';
+  server_address: string = '/api';
 
   constructor( private http: HttpClient) { }
 

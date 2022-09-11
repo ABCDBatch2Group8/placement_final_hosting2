@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class StudAuthService {
-  server_address: string = 'http://localhost:3000';
+  server_address: string = '/api';
   
   //    /api
 

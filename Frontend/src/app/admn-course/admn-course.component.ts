@@ -23,7 +23,7 @@ showform="none";
 courses:Courses[]=[];
 list:any;
 ref:any;
-server_address: string = 'http://localhost:3000';
+server_address: string = '/api';
 Course={
   course:'',
   category:'',

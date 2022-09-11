@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SkillService {
-  server_address: string = 'http://localhost:3000';
+  server_address: string = '/api';
 
   constructor(private http: HttpClient) { }
 

@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv/config');
 const  cors = require('cors');
+const path = require('path');
+app.use(express.static('./dist/frontend'));
 
 // Middleware
 app.use(express.urlencoded({extended: true})); 
@@ -18,14 +20,18 @@ const admin = require('./routes/admin');
 const skill = require('./routes/skill')
 const placement = require('./routes/placement');
 
-app.use('/employer/',employerRoute)
-app.use('/job/',jobRoute);
-app.use("/student",student);
-app.use('/admin',admin);
-app.use('/skill',skill);
-app.use('/placement',placement);
+app.use('/api/employer/',employerRoute)
+app.use('/api/job/',jobRoute);
+app.use("/api/student",student);
+app.use('/api/admin',admin);
+app.use('/api/skill',skill);
+app.use('/api/placement',placement);
 
-
+// for hosting
+app.get('/*', (req, res)=> {
+    res.sendFile(path.join(__dirname + '/dist/frontend/index.html'));
+    });
+    
 const port=process.env.PORT||3000;
 // Connect to db
 mongoose.connect(process.env.dbUrl, {   useNewUrlParser: true

@@ -5,10 +5,11 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AdmnCandidatesService {
+  server_address: string = '/api';
 
   constructor(private http : HttpClient) { }
 
   getStudents(){
-    return this.http.get("http://localhost:3000/admin/candidatelist");
+    return this.http.get(`${this.server_address}/admin/candidatelist`);
   }
 }

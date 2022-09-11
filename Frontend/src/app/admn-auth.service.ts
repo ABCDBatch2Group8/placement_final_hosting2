@@ -12,7 +12,7 @@ export class AdmnAuthService {
     lastname:'',
     email:''
   }
-  server_address: string = 'http://localhost:3000';
+  server_address: string = '/api';
 
   constructor(private http:HttpClient) { }
   admnlogin(admin:any){

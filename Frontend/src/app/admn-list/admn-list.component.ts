@@ -41,7 +41,7 @@ export class AdmnListComponent implements OnInit {
   password:any
   cpassword:any
   admnID:any;
-  server_address: string = 'http://localhost:3000';
+  server_address: string = '/api';
   msg:any;
 
   constructor(

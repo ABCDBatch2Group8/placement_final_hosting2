@@ -22,7 +22,7 @@ displayStyle = "none";
 showform="none";
 ref:any;
 num:any;
-server_address: string = 'http://localhost:3000';
+server_address: string = '/api';
 student={
   firstname:'',
   lastname:'',
