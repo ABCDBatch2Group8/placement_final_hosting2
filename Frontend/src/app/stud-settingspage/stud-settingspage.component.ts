@@ -58,7 +58,7 @@ export class StudSettingspageComponent implements OnInit {
           '',
           [
             Validators.required,
-            Validators.minLength(6),
+            Validators.minLength(8),
             Validators.maxLength(40),
              Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
           ]
@@ -86,7 +86,7 @@ export class StudSettingspageComponent implements OnInit {
         color: 'green',
         background: 'yellow',
         icon: 'success',
-        title: 'password changed successfully',
+        title: 'password reset successful',
         position: 'center-right',
         showConfirmButton: false,
         timer: 2000,
