@@ -158,7 +158,6 @@
         />
         <div *ngIf="f.submitted && end_date.errors" class="invalid-feedback">
           <div *ngIf="end_date.errors['required']">End date is required</div>
-          <div *ngIf="end_date.errors['pattern']">Please enter a valid date</div>
           <div *ngIf="end_date.errors['pattern']">Please enter the date in YYYY-MM-DD format </div>
         </div>
       </div>
