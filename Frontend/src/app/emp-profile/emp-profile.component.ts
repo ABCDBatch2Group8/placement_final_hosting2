@@ -34,4 +34,8 @@ export class EmpProfileComponent implements OnInit {
     this.router.navigate(['/employer/dashboard'])
   }
 
+  back(){
+    this.router.navigate(['employer/dashboard']);
+  }
+
 }

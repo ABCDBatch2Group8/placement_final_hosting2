@@ -78,10 +78,11 @@
   </div>
   <div class="form-group">
     <label>Offer date</label>
-    <input required class="form-control" name="offer_date" id="offer_date" type="text" #offer_date="ngModel" [(ngModel)]="addOffer.offer_date" onFocus="this.placeholder = ''" onBlur="this.placeholder = 'offer_date'" placeholder=" Enter offer date"
+    <input required class="form-control" name="offer_date" id="offer_date" pattern="^\d{4}-([0]\d|1[0-2])-([0-2]\d|3[01])$" type="text" #offer_date="ngModel" [(ngModel)]="addOffer.offer_date" onFocus="this.placeholder = ''" onBlur="this.placeholder = 'offer_date'" placeholder=" Enter offer date"
     [ngClass]="{ 'is-invalid': f.submitted && offer_date.errors }"/>
         <div *ngIf="f.submitted && offer_date.errors" class="invalid-feedback">
           <div *ngIf="offer_date.errors['required']">Offer date is required</div>
+          <div *ngIf="offer_date.errors['pattern']">Please enter the date in YYYY-MM-DD format </div>
         </div>
 </div>
 <div class="form-group">
